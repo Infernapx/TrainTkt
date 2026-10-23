@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Booking History | National Ticket Booking Spot</title>
+<link rel="stylesheet" th:href="@{/UserHome_Css.css}">
+</head>
+<body>
+	<header>
+		<h1 class="hd">National Ticket Booking Spot</h1>
+		<div style="display: flex; flex-wrap: wrap; gap: 8px;">
+			<div class="home"><p class="menu"><a th:href="@{/userhome}">Home</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/userviewtrainfwd}">View Trains</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/trainbwstnfwd}">Trains Between Stations</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/bookingdetails}">Booking History</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/fareenqfwd}">Fare Enquiry</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/useravailfwd}">Seat Availability</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/usersearchtrain}">Search by TrainNo</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/userprofile}">Profile</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/userlogout}" style="color: #f43f5e;">Logout</a></p></div>
+		</div>
+	</header>
+
+	<div class="tab">
+		<h2 style="font-family: 'Outfit', sans-serif; font-size: 22px; font-weight: 700; margin-bottom: 8px;">Your Booking History</h2>
+		<p style="color: var(--text-muted); font-size: 14px; margin-bottom: 18px;">Records of all past and upcoming express train reservations associated with your account.</p>
+
+		<div th:if="${bookings != null and not #lists.isEmpty(bookings)}">
+			<table>
+				<thead>
+					<tr>
+						<th>PNR / Trans ID</th>
+						<th>Train Number</th>
+						<th>Journey Date</th>
+						<th>From Station</th>
+						<th>To Station</th>
+						<th>Reserved Seats</th>
+						<th>Amount Paid</th>
+						<th>Status</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="b : ${bookings}">
+						<td><span class="train-number-badge" th:text="${b.transId}">NTBS-12345678</span></td>
+						<td style="font-weight: 700; color: #fff;" th:text="'#' + ${b.trNo}">#12367</td>
+						<td th:text="${b.journeyDate}">2026-10-23</td>
+						<td th:text="${b.fromStn}">PATNA</td>
+						<td th:text="${b.toStn}">ANAND VIHAR</td>
+						<td><span style="background: rgba(16, 185, 129, 0.15); color: #34d399; font-weight: 700; padding: 4px 10px; border-radius: 6px;" th:text="${b.seats} + ' Seats'">1 Seats</span></td>
+						<td><strong style="color: var(--neon-cyan);" th:text="'₹ ' + ${b.amount}">₹ 620.00</strong></td>
+						<td><span class="status-badge-active">&#10004; CONFIRMED</span></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<div th:if="${bookings == null or #lists.isEmpty(bookings)}" class="tab" style="padding: 24px; text-align: center; border: 1px dashed rgba(0,240,255,0.3);">
+			<div style="font-size: 32px; margin-bottom: 10px;">&#127915;</div>
+			<h3 style="font-size: 18px; margin-bottom: 6px;">No Bookings Found</h3>
+			<p style="color: var(--text-muted); font-size: 14px; margin-bottom: 16px;">You haven't reserved any train journeys yet.</p>
+			<a th:href="@{/userviewtrainfwd}" class="btn-book-primary">Book Your First Journey &#10142;</a>
+		</div>
+	</div>
+
+	<footer>
+		<p>© 2026 National Ticket Booking Spot. Modern Spring Boot & PostgreSQL.</p>
+	</footer>
+</body>
+</html>

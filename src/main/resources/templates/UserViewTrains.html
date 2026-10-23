@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Running Trains | National Ticket Booking Spot</title>
+<link rel="stylesheet" th:href="@{/UserHome_Css.css}">
+</head>
+<body>
+	<header>
+		<h1 class="hd">National Ticket Booking Spot</h1>
+		<div style="display: flex; flex-wrap: wrap; gap: 8px;">
+			<div class="home"><p class="menu"><a th:href="@{/userhome}">Home</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/userviewtrainfwd}">View Trains</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/trainbwstnfwd}">Trains Between Stations</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/bookingdetails}">Booking History</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/fareenqfwd}">Fare Enquiry</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/useravailfwd}">Seat Availability</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/usersearchtrain}">Search by TrainNo</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/userprofile}">Profile</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/userlogout}" style="color: #f43f5e;">Logout</a></p></div>
+		</div>
+	</header>
+
+	<div class="tab">
+		<h2 style="font-family: 'Outfit', sans-serif; font-size: 22px; font-weight: 700; margin-bottom: 8px;">Scheduled Running Trains</h2>
+		<p style="color: var(--text-muted); font-size: 14px; margin-bottom: 18px;">Live manifest of active express trains running across the network with real-time seat counts and fares.</p>
+
+		<table>
+			<thead>
+				<tr>
+					<th>Train Name</th>
+					<th>Train Number</th>
+					<th>From Station</th>
+					<th>To Station</th>
+					<th>Available Seats</th>
+					<th>Fare (INR)</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="train : ${trains}">
+					<td style="font-weight: 700; color: #ffffff;" th:text="${train.trName}">VIKRAMSHILA EXP</td>
+					<td><span class="train-number-badge" th:text="'#' + ${train.trNo}">#12367</span></td>
+					<td th:text="${train.fromStn}">PATNA</td>
+					<td th:text="${train.toStn}">ANAND VIHAR</td>
+					<td><span style="background: rgba(16, 185, 129, 0.15); color: #34d399; font-weight: 700; padding: 4px 10px; border-radius: 6px; border: 1px solid rgba(16, 185, 129, 0.35);" th:text="${train.seats} + ' Seats'">240 Seats</span></td>
+					<td><strong style="color: var(--neon-cyan); font-size: 16px;" th:text="'₹ ' + ${train.fare}">₹ 620.00</strong></td>
+					<td>
+						<a th:href="@{/booktrainbyref(trainNo=${train.trNo}, fromStn=${train.fromStn}, toStn=${train.toStn})}" class="btn-book">Book Now</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<footer>
+		<p>© 2026 National Ticket Booking Spot. Modern Spring Boot & PostgreSQL.</p>
+	</footer>
+</body>
+</html>

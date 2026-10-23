@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin - All Trains | National Ticket Booking Spot</title>
+<link rel="stylesheet" th:href="@{/UserHome_Css.css}">
+</head>
+<body>
+	<header>
+		<h1 class="hd">National Ticket Booking Spot &nbsp;<span style="font-size: 13px; font-weight: 700; color: #f43f5e; background: rgba(244, 63, 94, 0.15); border: 1px solid rgba(244, 63, 94, 0.4); padding: 4px 10px; border-radius: 9999px;">Admin Portal</span></h1>
+		<div style="display: flex; flex-wrap: wrap; gap: 8px;">
+			<div class="home"><p class="menu"><a th:href="@{/adminhome}">Home</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/adminviewtrainfwd}">View Trains</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/addtrainfwd}">Add Train</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/cancletrainfwd}">Delete Train</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/updatetrain}">Update Train</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/userlogout}" style="color: #f43f5e;">Logout</a></p></div>
+		</div>
+	</header>
+
+	<div class="tab">
+		<h2 style="font-family: 'Outfit', sans-serif; font-size: 22px; font-weight: 700; margin-bottom: 8px;">Railway Fleet Manifest</h2>
+		<p style="color: var(--text-muted); font-size: 14px; margin-bottom: 18px;">Overview of all operational trains registered in the PostgreSQL database.</p>
+
+		<table>
+			<thead>
+				<tr>
+					<th>Train Number</th>
+					<th>Train Name</th>
+					<th>From Station</th>
+					<th>To Station</th>
+					<th>Remaining Seats</th>
+					<th>Base Fare</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="train : ${trains}">
+					<td><span class="train-number-badge" th:text="'#' + ${train.trNo}">#12367</span></td>
+					<td style="font-weight: 700; color: #fff;" th:text="${train.trName}">VIKRAMSHILA EXP</td>
+					<td th:text="${train.fromStn}">PATNA</td>
+					<td th:text="${train.toStn}">ANAND VIHAR</td>
+					<td><span style="background: rgba(16, 185, 129, 0.15); color: #34d399; font-weight: 700; padding: 4px 10px; border-radius: 6px;" th:text="${train.seats} + ' Seats'">240</span></td>
+					<td><strong style="color: var(--neon-cyan); font-size: 16px;" th:text="'₹ ' + ${train.fare}">₹ 620.00</strong></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<footer>
+		<p>© 2026 National Ticket Booking Spot. Railway Administration System.</p>
+	</footer>
+</body>
+</html>

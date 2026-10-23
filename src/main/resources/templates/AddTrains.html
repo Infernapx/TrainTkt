@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Add Train | National Ticket Booking Spot</title>
+<link rel="stylesheet" th:href="@{/UserHome_Css.css}">
+</head>
+<body>
+	<header>
+		<h1 class="hd">National Ticket Booking Spot &nbsp;<span style="font-size: 13px; font-weight: 700; color: #f43f5e; background: rgba(244, 63, 94, 0.15); border: 1px solid rgba(244, 63, 94, 0.4); padding: 4px 10px; border-radius: 9999px;">Admin Portal</span></h1>
+		<div style="display: flex; flex-wrap: wrap; gap: 8px;">
+			<div class="home"><p class="menu"><a th:href="@{/adminhome}">Home</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/adminviewtrainfwd}">View Trains</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/addtrainfwd}">Add Train</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/cancletrainfwd}">Delete Train</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/updatetrain}">Update Train</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/userlogout}" style="color: #f43f5e;">Logout</a></p></div>
+		</div>
+	</header>
+
+	<div class="tab">
+		<h2 style="font-family: 'Outfit', sans-serif; font-size: 22px; font-weight: 700; margin-bottom: 8px;">Register New Train Route</h2>
+		<p style="color: var(--text-muted); font-size: 14px; margin-bottom: 20px;">Enter route details and seat quota to add a new operational express train to PostgreSQL.</p>
+
+		<form th:action="@{/addtrain}" method="post">
+			<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+				<div class="form-group">
+					<label class="form-label">Train Number</label>
+					<input type="number" name="trainno" placeholder="e.g. 12951" required>
+				</div>
+				<div class="form-group">
+					<label class="form-label">Train Name</label>
+					<input type="text" name="trainname" placeholder="e.g. MUMBAI TEJAS RAJDHANI" required>
+				</div>
+			</div>
+
+			<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+				<div class="form-group">
+					<label class="form-label">Origin Station</label>
+					<input type="text" name="fromstation" placeholder="e.g. MUMBAI CENTRAL" required>
+				</div>
+				<div class="form-group">
+					<label class="form-label">Terminus Station</label>
+					<input type="text" name="tostation" placeholder="e.g. NEW DELHI" required>
+				</div>
+			</div>
+
+			<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+				<div class="form-group">
+					<label class="form-label">Initial Available Seats</label>
+					<input type="number" name="seats" placeholder="e.g. 240" min="1" required>
+				</div>
+				<div class="form-group">
+					<label class="form-label">Base Ticket Fare (₹)</label>
+					<input type="number" step="0.5" name="fare" placeholder="e.g. 1850.00" required>
+				</div>
+			</div>
+
+			<input type="submit" value="Register Train to Database">
+		</form>
+	</div>
+
+	<footer>
+		<p>© 2026 National Ticket Booking Spot. Railway Administration System.</p>
+	</footer>
+</body>
+</html>

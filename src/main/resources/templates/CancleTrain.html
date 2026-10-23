@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cancel Train | National Ticket Booking Spot</title>
+<link rel="stylesheet" th:href="@{/UserHome_Css.css}">
+</head>
+<body>
+	<header>
+		<h1 class="hd">National Ticket Booking Spot &nbsp;<span style="font-size: 13px; font-weight: 700; color: #f43f5e; background: rgba(244, 63, 94, 0.15); border: 1px solid rgba(244, 63, 94, 0.4); padding: 4px 10px; border-radius: 9999px;">Admin Portal</span></h1>
+		<div style="display: flex; flex-wrap: wrap; gap: 8px;">
+			<div class="home"><p class="menu"><a th:href="@{/adminhome}">Home</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/adminviewtrainfwd}">View Trains</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/addtrainfwd}">Add Train</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/cancletrainfwd}">Delete Train</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/updatetrain}">Update Train</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/userlogout}" style="color: #f43f5e;">Logout</a></p></div>
+		</div>
+	</header>
+
+	<div class="tab">
+		<h2 style="font-family: 'Outfit', sans-serif; font-size: 22px; font-weight: 700; margin-bottom: 8px; color: #f87171;">Decommission / Cancel Train</h2>
+		<p style="color: var(--text-muted); font-size: 14px; margin-bottom: 20px;">Remove cancelled or retired trains permanently from the PostgreSQL database.</p>
+
+		<form th:action="@{/cancletrain}" method="post">
+			<div class="form-group">
+				<label class="form-label" style="color: #f87171;">Train Number to Remove</label>
+				<input type="number" name="trainno" placeholder="Enter train number (e.g. 10005)" required>
+			</div>
+
+			<input type="submit" value="Permanently Delete Train" style="background: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%); color: #fff;">
+		</form>
+	</div>
+
+	<footer>
+		<p>© 2026 National Ticket Booking Spot. Railway Administration System.</p>
+	</footer>
+</body>
+</html>

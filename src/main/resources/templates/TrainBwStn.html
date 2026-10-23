@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trains Between Stations | National Ticket Booking Spot</title>
+<link rel="stylesheet" th:href="@{/UserHome_Css.css}">
+</head>
+<body>
+	<header>
+		<h1 class="hd">National Ticket Booking Spot</h1>
+		<div style="display: flex; flex-wrap: wrap; gap: 8px;">
+			<div class="home"><p class="menu"><a th:href="@{/userhome}">Home</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/userviewtrainfwd}">View Trains</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/trainbwstnfwd}">Trains Between Stations</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/bookingdetails}">Booking History</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/fareenqfwd}">Fare Enquiry</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/useravailfwd}">Seat Availability</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/usersearchtrain}">Search by TrainNo</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/userprofile}">Profile</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/userlogout}" style="color: #f43f5e;">Logout</a></p></div>
+		</div>
+	</header>
+
+	<div class="tab">
+		<h2 style="font-family: 'Outfit', sans-serif; font-size: 22px; font-weight: 700; margin-bottom: 8px;">Search Trains Between Stations</h2>
+		<p style="color: var(--text-muted); font-size: 14px; margin-bottom: 20px;">Enter boarding and destination stations to find available routes and timetables.</p>
+
+		<form th:action="@{/trainbwstn}" method="post">
+			<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+				<div class="form-group">
+					<label class="form-label">From Station</label>
+					<input type="text" name="fromstation" placeholder="e.g. PATNA, HOWRAH, GAYA" th:value="${fromStation}" required>
+				</div>
+				<div class="form-group">
+					<label class="form-label">To Station</label>
+					<input type="text" name="tostation" placeholder="e.g. ANAND VIHAR, DELHI, JODHPUR" th:value="${toStation}" required>
+				</div>
+			</div>
+
+			<input type="submit" value="Find Available Trains">
+		</form>
+
+		<div th:if="${searched}">
+			<div th:if="${trains != null and not #lists.isEmpty(trains)}" style="margin-top: 24px;">
+				<h3 style="font-family: 'Outfit', sans-serif; font-size: 19px; font-weight: 700; margin-bottom: 14px;">
+					&#128646; Direct Trains Between <strong th:text="${fromStation}">PATNA</strong> and <strong th:text="${toStation}">DELHI</strong>
+				</h3>
+				<table>
+					<thead>
+						<tr>
+							<th>Train Name</th>
+							<th>Train No</th>
+							<th>From</th>
+							<th>To</th>
+							<th>Available Seats</th>
+							<th>Fare (INR)</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="train : ${trains}">
+							<td style="font-weight: 700; color: #fff;" th:text="${train.trName}">VIKRAMSHILA EXP</td>
+							<td><span class="train-number-badge" th:text="'#' + ${train.trNo}">#12367</span></td>
+							<td th:text="${train.fromStn}">PATNA</td>
+							<td th:text="${train.toStn}">ANAND VIHAR</td>
+							<td><span style="background: rgba(16, 185, 129, 0.15); color: #34d399; font-weight: 700; padding: 4px 10px; border-radius: 6px;" th:text="${train.seats} + ' Seats'">240</span></td>
+							<td><strong style="color: var(--neon-cyan);" th:text="'₹ ' + ${train.fare}">₹ 620.00</strong></td>
+							<td>
+								<a th:href="@{/booktrainbyref(trainNo=${train.trNo}, fromStn=${train.fromStn}, toStn=${train.toStn})}" class="btn-book">Book Now</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<div th:if="${trains == null or #lists.isEmpty(trains)}" class="alert-card-danger" style="margin-top: 20px;">
+				<div class="alert-card-icon">&#9888;</div>
+				<div>
+					<div class="alert-card-title">No Direct Trains Found</div>
+					<div class="alert-card-desc">There are no direct trains scheduled between <strong th:text="${fromStation}">Origin</strong> and <strong th:text="${toStation}">Destination</strong>. Try searching major junction stations like PATNA, HOWRAH, DELHI, or GAYA.</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer>
+		<p>© 2026 National Ticket Booking Spot. Modern Spring Boot & PostgreSQL.</p>
+	</footer>
+</body>
+</html>

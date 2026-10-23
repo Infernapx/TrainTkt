@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>National Ticket Booking Spot | Train Reservation System</title>
+<link rel="stylesheet" th:href="@{/UserHome_Css.css}">
+</head>
+<body>
+	<header>
+		<h1 class="hd">National Ticket Booking Spot</h1>
+		<div class="main">
+			<span class="menu"><a th:href="@{/index.html}">Passenger Login</a></span>
+			<span class="menu"><a th:href="@{/UserRegister.html}">Register Account</a></span>
+			<span class="menu"><a th:href="@{/index.html}">Admin Portal</a></span>
+		</div>
+	</header>
+
+	<div class="auth-container">
+		<div class="auth-header">
+			<h2 class="auth-title">Welcome to NTBS</h2>
+			<p class="auth-subtitle">Sign in to search trains, check availability, and book tickets instantly.</p>
+		</div>
+
+		<div class="auth-tabs">
+			<a th:href="@{/index.html}" class="auth-tab active">User Login</a>
+			<a th:href="@{/UserRegister.html}" class="auth-tab">New Register</a>
+			<a th:href="@{/index.html}" class="auth-tab">Admin Portal</a>
+		</div>
+
+		<div th:if="${hasError}" class="alert-card-danger" style="margin-bottom: 16px;">
+			<div class="alert-card-icon">&#9888;</div>
+			<div>
+				<div class="alert-card-title">Authentication Failed</div>
+				<div class="alert-card-desc">Invalid email address or password. Please verify and retry.</div>
+			</div>
+		</div>
+
+		<div th:if="${hasLogout}" class="tab green" style="padding: 12px 18px; margin-bottom: 16px; font-size: 13.5px;">
+			&#10004; You have been successfully signed out.
+		</div>
+
+		<form th:action="@{/userlogin}" method="post">
+			<div class="form-group">
+				<label class="form-label">Email Address</label>
+				<input type="email" name="uname" placeholder="name@example.com" value="shashi@demo.com" required>
+			</div>
+
+			<div class="form-group">
+				<label class="form-label">Password</label>
+				<input type="password" name="pword" placeholder="Enter password" value="shashi" required>
+			</div>
+
+			<div style="background: rgba(0, 240, 255, 0.08); border: 1px solid rgba(0, 240, 255, 0.25); border-radius: 8px; padding: 10px 14px; font-size: 13px; color: #38bdf8; margin-bottom: 8px;">
+				&#128161; <strong>Demo User:</strong> <code>shashi@demo.com</code> / <code>shashi</code> &nbsp;|&nbsp; <strong>Admin:</strong> <code>admin@demo.com</code> / <code>admin</code>
+			</div>
+
+			<input type="submit" value="Sign In to Book Tickets" style="width: 100%; max-width: 100%;">
+		</form>
+
+		<div style="text-align: center; margin-top: 20px; font-size: 14px; color: var(--text-muted);">
+			Need a new account? <a th:href="@{/UserRegister.html}" style="color: var(--neon-cyan); font-weight: 600; text-decoration: none;">Register here</a>
+		</div>
+	</div>
+
+	<footer>
+		<address id="cent" style="font-style: normal;">
+			National Ticket Booking Spot &nbsp;•&nbsp; Support: <a href="mailto:thebittercode@gmail.com">thebittercode@gmail.com</a>
+		</address>
+	</footer>
+</body>
+</html>

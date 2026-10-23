@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Booking Confirmed | National Ticket Booking Spot</title>
+<link rel="stylesheet" th:href="@{/UserHome_Css.css}">
+</head>
+<body>
+	<header>
+		<h1 class="hd">National Ticket Booking Spot</h1>
+		<div style="display: flex; flex-wrap: wrap; gap: 8px;">
+			<div class="home"><p class="menu"><a th:href="@{/userhome}">Home</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/userviewtrainfwd}">View Trains</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/trainbwstnfwd}">Trains Between Stations</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/bookingdetails}">Booking History</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/fareenqfwd}">Fare Enquiry</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/useravailfwd}">Seat Availability</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/usersearchtrain}">Search by TrainNo</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/userprofile}">Profile</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/userlogout}" style="color: #f43f5e;">Logout</a></p></div>
+		</div>
+	</header>
+
+	<div class="tab">
+		<div style="display: flex; align-items: center; gap: 14px; margin-bottom: 20px;">
+			<div style="width: 48px; height: 48px; border-radius: 50%; background: rgba(16, 185, 129, 0.2); border: 2px solid #10b981; display: flex; align-items: center; justify-content: center; font-size: 24px; color: #10b981;">&#10004;</div>
+			<div>
+				<h2 style="font-family: 'Outfit', sans-serif; font-size: 24px; font-weight: 800; margin: 0; color: #34d399;">Ticket Booking Confirmed!</h2>
+				<p style="color: var(--text-muted); font-size: 14px; margin: 0;">Your express reservation has been persisted to the PostgreSQL database.</p>
+			</div>
+		</div>
+
+		<div class="train-result-card" style="margin-bottom: 24px;">
+			<div class="train-meta-grid" style="border-top: none; padding-top: 0;">
+				<div class="meta-item">
+					<span class="meta-label">PNR / Transaction ID</span>
+					<span class="meta-val" style="color: var(--neon-cyan); font-family: 'JetBrains Mono', monospace;" th:text="${booking.transId}">NTBS-8A4F12C9</span>
+				</div>
+				<div class="meta-item">
+					<span class="meta-label">Train Number</span>
+					<span class="meta-val" th:text="'#' + ${booking.trNo}">#12367</span>
+				</div>
+				<div class="meta-item">
+					<span class="meta-label">Journey Date</span>
+					<span class="meta-val" th:text="${booking.journeyDate}">2026-10-23</span>
+				</div>
+				<div class="meta-item">
+					<span class="meta-label">Route</span>
+					<span class="meta-val" th:text="${booking.fromStn} + ' ➔ ' + ${booking.toStn}">PATNA ➔ ANAND VIHAR</span>
+				</div>
+				<div class="meta-item">
+					<span class="meta-label">Reserved Seats</span>
+					<span class="meta-val seats-val" th:text="${booking.seats} + ' Confirmed Seats'">1 Confirmed Seats</span>
+				</div>
+				<div class="meta-item">
+					<span class="meta-label">Total Amount Paid</span>
+					<span class="meta-val fare-val" th:text="'₹ ' + ${booking.amount}">₹ 620.00</span>
+				</div>
+			</div>
+		</div>
+
+		<div style="display: flex; gap: 12px; flex-wrap: wrap;">
+			<a th:href="@{/bookingdetails}" class="btn-book-primary">View All Bookings &#10142;</a>
+			<a th:href="@{/userviewtrainfwd}" class="quick-link-pill" style="padding: 10px 20px; font-size: 14px;">Browse More Trains</a>
+		</div>
+	</div>
+
+	<footer>
+		<p>© 2026 National Ticket Booking Spot. Modern Spring Boot & PostgreSQL.</p>
+	</footer>
+</body>
+</html>

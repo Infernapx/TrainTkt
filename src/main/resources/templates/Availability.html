@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seat Availability | National Ticket Booking Spot</title>
+<link rel="stylesheet" th:href="@{/UserHome_Css.css}">
+</head>
+<body>
+	<header>
+		<h1 class="hd">National Ticket Booking Spot</h1>
+		<div style="display: flex; flex-wrap: wrap; gap: 8px;">
+			<div class="home"><p class="menu"><a th:href="@{/userhome}">Home</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/userviewtrainfwd}">View Trains</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/trainbwstnfwd}">Trains Between Stations</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/bookingdetails}">Booking History</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/fareenqfwd}">Fare Enquiry</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/useravailfwd}">Seat Availability</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/usersearchtrain}">Search by TrainNo</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/userprofile}">Profile</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/userlogout}" style="color: #f43f5e;">Logout</a></p></div>
+		</div>
+	</header>
+
+	<div class="tab">
+		<h2 style="font-family: 'Outfit', sans-serif; font-size: 22px; font-weight: 700; margin-bottom: 8px;">Check Live Seat Availability</h2>
+		<p style="color: var(--text-muted); font-size: 14px; margin-bottom: 20px;">Enter train number or name (e.g. 12367, 10001) to inspect remaining available seats.</p>
+
+		<form th:action="@{/useravail}" method="post">
+			<div class="form-group">
+				<label class="form-label">Train Number or Name</label>
+				<input type="text" name="trainno" placeholder="Enter 5-digit train number (e.g. 12367)" th:value="${trainQuery}" required>
+			</div>
+
+			<input type="submit" value="Check Seat Availability">
+		</form>
+
+		<div th:if="${searched}" style="margin-top: 24px;">
+			<div th:if="${train != null}" class="train-result-card">
+				<div class="train-result-header">
+					<div class="train-identity">
+						<span class="train-number-badge" th:text="'#' + ${train.trNo}">#12367</span>
+						<h3 class="train-name" th:text="${train.trName}">VIKRAMSHILA EXP</h3>
+					</div>
+					<span class="status-badge-active">&#9679; Available for Reservation</span>
+				</div>
+				<div class="train-meta-grid">
+					<div class="meta-item">
+						<span class="meta-label">Route</span>
+						<span class="meta-val" th:text="${train.fromStn} + ' ➔ ' + ${train.toStn}">PATNA ➔ ANAND VIHAR</span>
+					</div>
+					<div class="meta-item">
+						<span class="meta-label">Remaining Seats</span>
+						<span class="meta-val seats-val" th:text="'&#128186; ' + ${train.seats} + ' Seats'">240 Seats</span>
+					</div>
+					<div class="meta-item">
+						<span class="meta-label">Ticket Fare</span>
+						<span class="meta-val fare-val" th:text="'₹ ' + ${train.fare}">₹ 620.00</span>
+					</div>
+					<div class="meta-item" style="display:flex; justify-content:flex-end;">
+						<a th:href="@{/booktrainbyref(trainNo=${train.trNo}, fromStn=${train.fromStn}, toStn=${train.toStn})}" class="btn-book-primary">Book Now &#10142;</a>
+					</div>
+				</div>
+			</div>
+
+			<div th:if="${train == null}" class="alert-card-danger">
+				<div class="alert-card-icon">&#9888;</div>
+				<div>
+					<div class="alert-card-title">Train Not Found</div>
+					<div class="alert-card-desc">No train found matching <strong th:text="${trainQuery}">Query</strong> in the database.</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer>
+		<p>© 2026 National Ticket Booking Spot. Modern Spring Boot & PostgreSQL.</p>
+	</footer>
+</body>
+</html>

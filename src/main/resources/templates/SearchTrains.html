@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Search by Train Number | National Ticket Booking Spot</title>
+<link rel="stylesheet" th:href="@{/UserHome_Css.css}">
+</head>
+<body>
+	<header>
+		<h1 class="hd">National Ticket Booking Spot</h1>
+		<div style="display: flex; flex-wrap: wrap; gap: 8px;">
+			<div class="home"><p class="menu"><a th:href="@{/userhome}">Home</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/userviewtrainfwd}">View Trains</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/trainbwstnfwd}">Trains Between Stations</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/bookingdetails}">Booking History</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/fareenqfwd}">Fare Enquiry</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/useravailfwd}">Seat Availability</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/usersearchtrain}">Search by TrainNo</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/userprofile}">Profile</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/userlogout}" style="color: #f43f5e;">Logout</a></p></div>
+		</div>
+	</header>
+
+	<div class="tab">
+		<h2 style="font-family: 'Outfit', sans-serif; font-size: 22px; font-weight: 700; margin-bottom: 8px;">Search Train by Number or Name</h2>
+		<p style="color: var(--text-muted); font-size: 14px; margin-bottom: 20px;">Lookup full route, schedule, fare, and available seats by train number or name.</p>
+
+		<form id="searchTrainForm" th:action="@{/searchtrainservlet}" method="post">
+			<div class="form-group">
+				<label class="form-label" for="trainnumber">Train Number or Name</label>
+				<div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
+					<input type="text" id="trainnumber" name="trainnumber" placeholder="Enter train number or name (e.g. 12367, 10001)" style="max-width: 380px;" required autocomplete="off">
+					<button type="submit" id="btnSearchTrain" style="margin-top: 0; padding: 12px 28px; background: linear-gradient(135deg, #00f0ff 0%, #38bdf8 50%, #8b5cf6 100%); color: #060913; font-weight: 800; border: none; border-radius: var(--radius-sm); cursor: pointer; box-shadow: var(--shadow-btn);">SEARCH TRAIN</button>
+				</div>
+				<div style="margin-top: 14px; font-size: 13px; color: var(--text-muted); display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+					<span style="font-weight: 600; color: var(--neon-cyan);">Quick Try:</span>
+					<button type="button" onclick="quickSearch('12367')" class="quick-link-pill">12367 (Vikramshila Exp)</button>
+					<button type="button" onclick="quickSearch('10001')" class="quick-link-pill">10001 (Jodhpur Exp)</button>
+					<button type="button" onclick="quickSearch('10002')" class="quick-link-pill">10002 (Yamuna Exp)</button>
+					<button type="button" onclick="quickSearch('10103')" class="quick-link-pill">10103 (Mahabodhi Exp)</button>
+					<button type="button" onclick="quickSearch('12301')" class="quick-link-pill">12301 (Rajdhani Exp)</button>
+				</div>
+			</div>
+		</form>
+
+		<div id="searchResultsArea" class="search-results-wrapper" style="display: none;"></div>
+	</div>
+
+	<script>
+		function quickSearch(trainNo) {
+			document.getElementById('trainnumber').value = trainNo;
+			doSearch();
+		}
+
+		async function doSearch() {
+			const input = document.getElementById('trainnumber');
+			const trainNo = input.value.trim();
+			if (!trainNo) {
+				input.focus();
+				return;
+			}
+
+			const resultsArea = document.getElementById('searchResultsArea');
+			resultsArea.style.display = 'block';
+			resultsArea.innerHTML = `
+				<div style="display:flex; align-items:center; justify-content:center; gap:12px; padding:28px 16px; color:#94a3b8; font-weight:600;">
+					<div style="width:22px; height:22px; border:3px solid rgba(0, 240, 255, 0.2); border-top-color:#00f0ff; border-radius:50%; animation:spin 0.8s linear infinite;"></div>
+					<span>Searching PostgreSQL train database for #${trainNo}...</span>
+				</div>
+				<style>@keyframes spin { to { transform: rotate(360deg); } }</style>
+			`;
+
+			try {
+				const formData = new URLSearchParams();
+				formData.append('trainnumber', trainNo);
+
+				const response = await fetch('searchtrainservlet', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded'
+					},
+					body: formData.toString()
+				});
+
+				if (response.ok) {
+					const html = await response.text();
+					resultsArea.innerHTML = html;
+				} else {
+					resultsArea.innerHTML = `
+						<div class="alert-card-danger">
+							<div class="alert-card-icon">&#9888;</div>
+							<div>
+								<div class="alert-card-title">Search Failed</div>
+								<div class="alert-card-desc">Server returned error (${response.status}). Please try again.</div>
+							</div>
+						</div>
+					`;
+				}
+			} catch (err) {
+				resultsArea.innerHTML = `
+					<div class="alert-card-danger">
+						<div class="alert-card-icon">&#9888;</div>
+						<div>
+							<div class="alert-card-title">Network Error</div>
+							<div class="alert-card-desc">Unable to contact reservation service. Check connection and retry.</div>
+						</div>
+					</div>
+				`;
+			}
+		}
+
+		document.getElementById('searchTrainForm').addEventListener('submit', function(e) {
+			e.preventDefault();
+			doSearch();
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book Ticket | National Ticket Booking Spot</title>
+<link rel="stylesheet" th:href="@{/UserHome_Css.css}">
+</head>
+<body>
+	<header>
+		<h1 class="hd">National Ticket Booking Spot</h1>
+		<div style="display: flex; flex-wrap: wrap; gap: 8px;">
+			<div class="home"><p class="menu"><a th:href="@{/userhome}">Home</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/userviewtrainfwd}">View Trains</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/trainbwstnfwd}">Trains Between Stations</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/bookingdetails}">Booking History</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/fareenqfwd}">Fare Enquiry</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/useravailfwd}">Seat Availability</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/usersearchtrain}">Search by TrainNo</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/userprofile}">Profile</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/userlogout}" style="color: #f43f5e;">Logout</a></p></div>
+		</div>
+	</header>
+
+	<div class="tab">
+		<h2 style="font-family: 'Outfit', sans-serif; font-size: 22px; font-weight: 700; margin-bottom: 8px;">Quick Train Reservation</h2>
+		<p style="color: var(--text-muted); font-size: 14px; margin-bottom: 20px;">
+			Reserve your express train ticket directly. Select travel class, passenger count, and journey date.
+		</p>
+
+		<div th:if="${error}" class="alert-card-danger" style="margin-bottom: 16px;">
+			<div class="alert-card-icon">&#9888;</div>
+			<div th:text="${error}">Error message</div>
+		</div>
+
+		<form th:action="@{/payment}" method="post">
+			<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+				<div class="form-group">
+					<label class="form-label">Train Number</label>
+					<input type="text" name="trainnumber" placeholder="e.g. 12367" th:value="${trainNo}" required>
+				</div>
+				<div class="form-group">
+					<label class="form-label">Number of Passengers / Seats</label>
+					<input type="number" name="seats" min="1" max="10" value="1" required>
+				</div>
+			</div>
+
+			<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+				<div class="form-group">
+					<label class="form-label">Date of Journey</label>
+					<input type="date" name="journeydate" required>
+				</div>
+				<div class="form-group">
+					<label class="form-label">Travel Class</label>
+					<select name="class" required>
+						<option value="Sleeper(SL)">Sleeper (SL)</option>
+						<option value="Second Sitting(2S)">Second Sitting (2S)</option>
+						<option value="AC 3 Tier(3A)">AC 3 Tier (3A)</option>
+						<option value="AC 2 Tier(2A)">AC 2 Tier (2A)</option>
+						<option value="AC First Class(1A)">AC First Class (1A)</option>
+					</select>
+				</div>
+			</div>
+
+			<input type="submit" value="Proceed to Payment">
+		</form>
+	</div>
+
+	<script>
+		const today = new Date().toISOString().split('T')[0];
+		const dateInput = document.querySelector('input[name="journeydate"]');
+		if (dateInput) {
+			dateInput.value = today;
+			dateInput.min = today;
+		}
+	</script>
+</body>
+</html>

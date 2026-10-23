@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>User Profile | National Ticket Booking Spot</title>
+<link rel="stylesheet" th:href="@{/UserHome_Css.css}">
+</head>
+<body>
+	<header>
+		<h1 class="hd">National Ticket Booking Spot</h1>
+		<div style="display: flex; flex-wrap: wrap; gap: 8px;">
+			<div class="home"><p class="menu"><a th:href="@{/userhome}">Home</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/userviewtrainfwd}">View Trains</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/trainbwstnfwd}">Trains Between Stations</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/bookingdetails}">Booking History</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/fareenqfwd}">Fare Enquiry</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/useravailfwd}">Seat Availability</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/usersearchtrain}">Search by TrainNo</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/userprofile}">Profile</a></p></div>
+			<div class="home"><p class="menu"><a th:href="@{/userlogout}" style="color: #f43f5e;">Logout</a></p></div>
+		</div>
+	</header>
+
+	<div class="tab">
+		<h2 style="font-family: 'Outfit', sans-serif; font-size: 22px; font-weight: 700; margin-bottom: 8px;">Passenger Profile View</h2>
+		<p style="color: var(--text-muted); font-size: 14px; margin-bottom: 20px;">Personal details and verified contact information saved in the PostgreSQL database.</p>
+
+		<div class="train-result-card" th:if="${customer != null}">
+			<div class="train-meta-grid" style="border-top: none; padding-top: 0; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+				<div class="meta-item">
+					<span class="meta-label">Full Name</span>
+					<span class="meta-val" style="color: #fff;" th:text="${customer.fname} + ' ' + ${customer.lname}">Shashi Raj</span>
+				</div>
+				<div class="meta-item">
+					<span class="meta-label">Email (Login ID)</span>
+					<span class="meta-val" style="color: var(--neon-cyan);" th:text="${customer.mailId}">shashi@demo.com</span>
+				</div>
+				<div class="meta-item">
+					<span class="meta-label">Phone Number</span>
+					<span class="meta-val" th:text="${customer.phno}">9876543211</span>
+				</div>
+				<div class="meta-item">
+					<span class="meta-label">Residential Address</span>
+					<span class="meta-val" th:text="${customer.addr}">Patna, Bihar</span>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer>
+		<p>© 2026 National Ticket Booking Spot. Modern Spring Boot & PostgreSQL.</p>
+	</footer>
+</body>
+</html>

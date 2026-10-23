@@ -1,64 +1,58 @@
-# NTBS — Cyber-Transit Train Ticket Reservation System
+# NTBS — Modern Cyber-Transit Train Ticket Reservation System
 
-[![Java Version](https://img.shields.io/badge/Java-17%2B-blue.svg?style=flat-square&logo=openjdk)](https://openjdk.org/)
+[![Java Version](https://img.shields.io/badge/Java-25%20LTS-007396.svg?style=flat-square&logo=openjdk)](https://openjdk.org/)
+[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.3.4-6DB33F.svg?style=flat-square&logo=springboot)](https://spring.io/projects/spring-boot)
+[![Spring Security](https://img.shields.io/badge/Spring%20Security-6.x-6DB33F.svg?style=flat-square&logo=springsecurity)](https://spring.io/projects/spring-security)
+[![Spring Data JPA](https://img.shields.io/badge/Spring%20Data-JPA%20%2F%20Hibernate-59666C.svg?style=flat-square&logo=hibernate)](https://spring.io/projects/spring-data-jpa)
+[![Database](https://img.shields.io/badge/Database-PostgreSQL%2016-336791.svg?style=flat-square&logo=postgresql)](https://www.postgresql.org/)
 [![Build Tool](https://img.shields.io/badge/Build-Maven%203.9-C71A36.svg?style=flat-square&logo=apachemaven)](https://maven.apache.org/)
-[![Server](https://img.shields.io/badge/Server-Embedded%20Tomcat%209-F8DC75.svg?style=flat-square&logo=apachetomcat)](https://tomcat.apache.org/)
-[![Database](https://img.shields.io/badge/Database-Embedded%20H2-blueviolet.svg?style=flat-square)](https://www.h2database.com/)
 [![UI Style](https://img.shields.io/badge/Design-Cyber--Transit%20Dark%20HUD-00f0ff.svg?style=flat-square)](https://github.com/Infernapx/TrainTkt)
 [![License](https://img.shields.io/badge/License-MIT-green.svg?style=flat-square)](LICENSE)
 
-An enterprise-grade, high-performance Railway Reservation System built with **Java Servlets & J2EE**, featuring an embedded zero-configuration **H2 Database** and an extraordinary **Futuristic Cyber-Transit HUD** interface.
+An enterprise-grade, modern cloud-native Railway Reservation System re-architected with **Java 25 LTS**, **Spring Boot 3.3**, **Spring Security 6**, **Spring Data JPA (Hibernate 6)**, **PostgreSQL 16**, and an extraordinary **Futuristic Cyber-Transit HUD** interface powered by **Thymeleaf, HTML5, CSS3, and JavaScript**.
 
 ---
 
-## 🌟 Overview & Project Scope
+## 🌟 Modernization Overview & Architecture Evolution
 
-The **National Ticket Booking Spot (NTBS)** reimagines digital train reservation. Designed to replace outdated, cumbersome booking systems, NTBS delivers a lightning-fast, intuitive travel management experience for passengers and railway dispatchers.
+The legacy application was originally built on outdated Java EE servlets, manual raw JDBC queries, and flat web pages. This version modernizes the entire stack to state-of-the-art enterprise Java standards:
 
-### Core Problems Solved
-- **Zero-Setup Database Barrier**: Traditional enterprise Java railway apps rely on complex external Oracle database setups. NTBS ships with a lightweight, embedded **H2 Database** engine that automatically bootstraps schemas and seeds realistic express train schedules on the first launch.
-- **Next-Gen Visual Telemetry**: Replaces flat 2000s-style tables with a glassmorphic **Cyber-Transit UI** featuring animated route track light beams, neon indicators, and high-contrast telemetry panels.
-- **Intelligent Schedule Discovery**: Handles fuzzy train lookups, trimmed whitespace, `#` prefix removal (e.g. `#12367`), and train name queries with instant feedback.
-- **Role-Gated Security**: Strict session authorization cleanly separates regular passenger capabilities from railway administrative oversight.
+| Component | Legacy Architecture | Modernized Architecture |
+| :--- | :--- | :--- |
+| **Java Platform** | Java 7/8 / J2EE | **Java 25 LTS** |
+| **Framework** | Raw Servlets (`javax.servlet`) | **Spring Boot 3.3.4** |
+| **Security & Auth** | Raw HttpSession checks | **Spring Security 6** (Form Login, BCrypt Hashing, Role Gates) |
+| **Persistence Layer**| Raw JDBC `PreparedStatement` | **Spring Data JPA / Hibernate 6** with transactional repositories |
+| **Database** | Oracle JDBC / Embedded H2 | **PostgreSQL 16** with automatic schema synchronization |
+| **Template Engine** | Static HTML / Scriptlets | **Thymeleaf 3 + Spring Security 6 dialect** |
+| **Containerization** | None | **Docker Compose** ready (`docker-compose.yml`) |
+| **User Interface** | 2000s legacy table design | **Futuristic Cyber-Transit HUD** (dark mode, glassmorphism, animated route beams) |
 
 ---
 
 ## 🚀 Key Features
 
 ### 👤 Passenger Portal
-- **Live Running Trains Manifest**: Real-time view of all scheduled trains, routes, current seating availability, and base fares.
-- **Fuzzy Train Search**: Search by 5-digit train number (e.g., `12367`, `10001`) or name (e.g., `Vikramshila`, `Rajdhani`) with one-click quick-search chips.
-- **Station-to-Station Routing**: Query direct routes between any origin and destination junction.
-- **Live Seat Availability & Fare Enquiry**: Instant capacity inspection before booking.
-- **Multi-Class Reservation Engine**: Support for Sleeper (`SL`), Second Sitting (`2S`), AC 3 Tier (`3A`), AC 2 Tier (`2A`), and AC First Class (`1A`).
-- **Simulated 256-Bit SSL Payment Sandbox**: Card checkout simulation with instantaneous booking confirmation and unique PNR/Transaction generation.
-- **Booking History**: Chronological log of all previous journeys, ticket statuses, and amounts paid.
-- **Profile Management**: Account management and password update tools.
+- **Live Running Express Trains**: Real-time inspection of scheduled trains, routes, live seating availability, and base fares.
+- **Fuzzy Train Search Engine**: Search by train number (e.g., `12367`, `10001`), partial string, or train name (`Vikramshila`, `Rajdhani`) with one-click quick-search chips.
+- **Station-to-Station Routing**: Discover direct and connecting routes between any departure and arrival stations.
+- **Real-Time Seat Availability & Fare Enquiry**: Dynamic calculation based on selected travel class.
+- **Multi-Class Reservation Engine**: Sleeper (`SL`), Second Sitting (`2S`), AC 3 Tier (`3A`), AC 2 Tier (`2A`), and AC First Class (`1A`).
+- **Simulated 256-Bit SSL Payment Gateway**: Instant ticket confirmation, seat allocation, and unique cryptographic PNR generation.
+- **Booking History**: Real-time tracking of passenger journey history and e-tickets.
+- **Profile Management**: Profile updates and secure password management.
 
 ### 🛡️ Admin Command Center
-- **Fleet Schedule Inspector**: Audit the status of all active routes and trains across the railway network.
-- **Add New Routes**: Register new train numbers, originating stations, terminus stations, ticket fares, and maximum seat capacities.
+- **Fleet Schedule Management**: Complete view and real-time monitoring of all train routes.
+- **Add New Trains & Routes**: Register new train numbers, originating stations, terminus stations, fares, and seat quotas.
 - **Update Schedules & Capacities**: Dynamically adjust ticket pricing and seat allocation.
-- **Decommission / Cancel Trains**: Safely remove outdated or cancelled trains from the active schedule.
+- **Decommission / Cancel Trains**: Safely decommission trains with automatic data integrity handling.
 
 ### 🎨 Futuristic Cyber-Transit UI
-- **Cosmic Obsidian Theme**: Deep dark backdrop (`#060913`) accented with multi-layer radial cyan (`#00f0ff`) and violet (`#8b5cf6`) glow meshes.
-- **Glassmorphism HUD**: Translucent frosted panels (`backdrop-filter: blur(24px) saturate(180%)`) with hairline neon cyan borders.
-- **Animated Transit Light Beam**: Pulsing animated electric particle beam (`@keyframes transitBeamFlow`) traveling from origin to destination.
-- **Hologram Action Elements**: Radiant gradient buttons with micro-interactions and reflection sweep animations.
-- **Platform Encoding Compliance**: Fully sanitized for Windows/Linux UTF-8 compatibility, preventing mojibake (`??`) artifacts.
-
----
-
-## 🛠️ Technology Stack
-
-| Layer | Technologies |
-| :--- | :--- |
-| **Frontend** | HTML5, Vanilla CSS3 (Custom Design System, Tokens, Keyframe Animations), Google Fonts (*Outfit*, *Space Grotesk*, *Plus Jakarta Sans*, *JetBrains Mono*) |
-| **Backend** | Java 17 / J2EE, Java Servlets (`javax.servlet`), MVC Pattern |
-| **Database** | Embedded H2 Database (In-Memory/Persistent file mode, Auto-Bootstrapped via `DBUtil`) |
-| **Server & Packaging** | Apache Maven 3.9+, Embedded Apache Tomcat 9 (`webapp-runner`) |
-| **Security** | HTTP Session Management, Role-Based Access Control (`CUSTOMER` & `ADMIN`) |
+- **Cosmic Obsidian Theme**: High-contrast dark backdrop (`#060913`) with multi-layered neon cyan (`#00f0ff`) and violet (`#8b5cf6`) glow meshes.
+- **Glassmorphism HUD**: Translucent frosted panels (`backdrop-filter: blur(24px) saturate(180%)`) with hairline neon borders.
+- **Animated Transit Light Beam**: Electric particle beam (`@keyframes transitBeamFlow`) animating transit paths from origin to destination.
+- **Responsive & Accessible**: Optimized for desktop, tablet, and mobile browsers with zero external UI framework dependencies.
 
 ---
 
@@ -66,158 +60,171 @@ The **National Ticket Booking Spot (NTBS)** reimagines digital train reservation
 
 ```mermaid
 flowchart TD
-    User([Passenger / Administrator]) -->|Access Portal| WebUI[Futuristic Web Interface]
+    User([Passenger / Administrator]) -->|Access Portal| WebUI[Cyber-Transit Thymeleaf UI]
     
     subgraph Client Layer
-        WebUI -->|HTTP Requests| Nav[Navigation & Forms]
-        Nav -->|Credentials| Auth[Session Auth Guard]
+        WebUI -->|HTTP Requests| SecFilter[Spring Security 6 Filter Chain]
+        SecFilter -->|BCrypt Auth & Role Check| AuthManager[Authentication Manager]
     end
 
-    subgraph Servlet Controller Layer
-        Auth -->|Role: CUSTOMER| CustomerServlets[User Servlets\n- UserSearchTrain\n- TrainBwStn\n- BookTrains\n- Payment]
-        Auth -->|Role: ADMIN| AdminServlets[Admin Servlets\n- AddTrain\n- UpdateTrain\n- CancleTrain\n- AdminSearchTrain]
+    subgraph Spring Boot Controller Layer
+        SecFilter -->|Authorized| WebCtrl[WebController]
     end
 
-    subgraph Service & DAO Layer
-        CustomerServlets --> TrainService[TrainServiceImpl]
-        CustomerServlets --> BookingService[BookingServiceImpl]
-        CustomerServlets --> UserService[UserServiceImpl]
-        AdminServlets --> TrainService
+    subgraph Service Layer
+        WebCtrl --> TrainSvc[TrainService / TrainServiceImpl]
+        WebCtrl --> BookSvc[BookingService / BookingServiceImpl]
+        WebCtrl --> UserSvc[UserService / UserServiceImpl]
     end
 
-    subgraph Data Layer
-        TrainService --> DBUtil[(Embedded H2 Database\n./data/traindb)]
-        BookingService --> DBUtil
-        UserService --> DBUtil
+    subgraph Spring Data JPA Repositories
+        TrainSvc --> TrainRepo[TrainRepository]
+        BookSvc --> BookRepo[BookingHistoryRepository]
+        UserSvc --> CustRepo[CustomerRepository]
+        UserSvc --> AdminRepo[AdminRepository]
+    end
+
+    subgraph Persistence Layer
+        TrainRepo --> Postgres[(PostgreSQL 16 Database\nlocalhost:5432/traindb)]
+        BookRepo --> Postgres
+        CustRepo --> Postgres
+        AdminRepo --> Postgres
     end
 ```
 
-### Booking Lifecycle Flow
+### End-to-End Booking Sequence
 
 ```mermaid
 sequenceDiagram
     autonumber
     actor Passenger
-    participant Servlet as UserSearchTrain / TrainBwStn
-    participant Service as TrainServiceImpl
-    participant DB as Embedded H2 Database
-    participant Payment as Payment Servlet
-    participant Booking as BookingServiceImpl
+    participant UI as Cyber-Transit Frontend
+    participant Ctrl as WebController
+    participant BookSvc as BookingServiceImpl
+    participant Repo as TrainRepository & BookingHistoryRepository
+    participant DB as PostgreSQL 16
 
-    Passenger->>Servlet: Search Train / Route (e.g. 12367)
-    Servlet->>Service: getTrainByIdOrName("12367")
-    Service->>DB: Query TRAIN table
-    DB-->>Service: Return Train details (Seats, Fare, Stations)
-    Service-->>Servlet: TrainBean Record
-    Servlet-->>Passenger: Render HUD Result Card with Animated Route Beam
+    Passenger->>UI: Search Train / Route (e.g. 12367)
+    UI->>Ctrl: GET /userviewtrainfwd or POST /searchtrainservlet
+    Ctrl->>TrainSvc: getTrainByIdOrName("12367")
+    TrainSvc->>DB: SELECT * FROM trains WHERE ...
+    DB-->>TrainSvc: Train Entity Record
+    TrainSvc-->>Ctrl: Train Details
+    Ctrl-->>UI: Render Dynamic HUD Train Card
 
-    Passenger->>Payment: Select Date, Class, Passengers -> Checkout
-    Payment-->>Passenger: Render Simulated 256-Bit SSL Gateway
-    Passenger->>Payment: Submit Payment
-    Payment->>Booking: transId, userMail, trainNo, seats, fare
-    Booking->>DB: Deduct Seats & INSERT INTO HISTORY
-    DB-->>Booking: Transaction Committed
-    Booking-->>Passenger: Issue Confirmed Ticket with PNR & Seat Allocation
+    Passenger->>UI: Select Date, Class, Seats -> Checkout
+    UI->>Ctrl: POST /payment
+    Ctrl->>BookSvc: bookTicket(trainNo, journeyDate, seats, amount)
+    BookSvc->>DB: BEGIN TRANSACTION
+    BookSvc->>Repo: Deduct available seats
+    BookSvc->>Repo: Save BookingHistory entity (PNR)
+    DB-->>BookSvc: COMMIT TRANSACTION
+    BookSvc-->>Ctrl: Confirmed Booking Record
+    Ctrl-->>UI: Render BookingSuccess with PNR & Journey Summary
 ```
 
 ---
 
-## 🗄️ Database Schema & Seed Data
+## 🗄️ PostgreSQL Database Schema
 
-The database initializes automatically when the application starts (`DBUtil.java`).
+Entity persistence is automatically managed by Spring Data JPA with PostgreSQL:
 
-### 1. `TRAIN`
+### 1. `trains`
 | Column | Type | Description |
 | :--- | :--- | :--- |
-| `TR_NO` | `BIGINT PRIMARY KEY` | Unique Train Number (e.g. `12367`, `10001`) |
-| `TR_NAME` | `VARCHAR(70)` | Train Name (e.g. `VIKRAMSHILA EXP`, `RAJDHANI EXP`) |
-| `FROM_STN` | `VARCHAR(20)` | Origin Station (e.g. `PATNA`, `HOWRAH`) |
-| `TO_STN` | `VARCHAR(20)` | Terminus Station (e.g. `ANAND VIHAR`, `DELHI`) |
-| `SEATS` | `INT` | Total Available Seats |
-| `FARE` | `DECIMAL(6,2)` | Base Ticket Price (₹ INR) |
+| `train_no` | `BIGINT PRIMARY KEY` | Unique 5-digit Train Number |
+| `train_name`| `VARCHAR(70)` | Express / Mail / Vande Bharat Train Name |
+| `from_station` | `VARCHAR(30)` | Originating Station |
+| `to_station` | `VARCHAR(30)` | Terminating Station |
+| `seats` | `INTEGER` | Current Available Capacity |
+| `fare` | `NUMERIC(8,2)` | Base Fare (₹ INR) |
 
-### 2. `CUSTOMER`
+### 2. `customers`
 | Column | Type | Description |
 | :--- | :--- | :--- |
-| `MAILID` | `VARCHAR(40) PRIMARY KEY` | User Email / Login ID |
-| `PWORD` | `VARCHAR(20)` | Account Password |
-| `FNAME` | `VARCHAR(20)` | First Name |
-| `LNAME` | `VARCHAR(20)` | Last Name |
-| `ADDR` | `VARCHAR(100)` | Address |
-| `PHNO` | `BIGINT` | Contact Number |
+| `email` | `VARCHAR(80) PRIMARY KEY` | Passenger Email & Login ID |
+| `password` | `VARCHAR(100)` | BCrypt Encrypted Password |
+| `first_name` | `VARCHAR(50)` | Passenger First Name |
+| `last_name` | `VARCHAR(50)` | Passenger Last Name |
+| `address` | `VARCHAR(200)` | Residential Address |
+| `phone_no` | `BIGINT` | Mobile Phone Number |
 
-### 3. `ADMIN`
+### 3. `admins`
 | Column | Type | Description |
 | :--- | :--- | :--- |
-| `MAILID` | `VARCHAR(40) PRIMARY KEY` | Administrator Email ID |
-| `PWORD` | `VARCHAR(20)` | Administrator Password |
-| `FNAME` | `VARCHAR(20)` | First Name |
-| `LNAME` | `VARCHAR(20)` | Last Name |
-| `ADDR` | `VARCHAR(100)` | Address |
-| `PHNO` | `BIGINT` | Contact Number |
+| `email` | `VARCHAR(80) PRIMARY KEY` | Administrator Email & Login ID |
+| `password` | `VARCHAR(100)` | BCrypt Encrypted Password |
+| `first_name` | `VARCHAR(50)` | Administrator First Name |
+| `last_name` | `VARCHAR(50)` | Administrator Last Name |
+| `address` | `VARCHAR(200)` | Department / Office Address |
+| `phone_no` | `BIGINT` | Official Contact Number |
 
-### 4. `HISTORY`
+### 4. `booking_history`
 | Column | Type | Description |
 | :--- | :--- | :--- |
-| `TRANSID` | `VARCHAR(36) PRIMARY KEY` | PNR / Unique Transaction Identifier |
-| `MAILID` | `VARCHAR(40)` | Booking Customer ID (Foreign Key) |
-| `TR_NO` | `BIGINT` | Reserved Train Number |
-| `DATE` | `DATE` | Date of Journey |
-| `FROM_STN` | `VARCHAR(20)` | Boarding Station |
-| `TO_STN` | `VARCHAR(20)` | Deboarding Station |
-| `SEATS` | `INT` | Number of Reserved Seats |
-| `AMOUNT` | `DECIMAL(8,2)` | Total Fare Paid (₹ INR) |
+| `transaction_id` | `VARCHAR(64) PRIMARY KEY` | Unique Cryptographic PNR / Transaction ID |
+| `customer_email` | `VARCHAR(80)` | Booking Customer ID (Foreign Reference) |
+| `train_no` | `BIGINT` | Booked Train Number |
+| `journey_date` | `DATE` | Date of Scheduled Journey |
+| `from_station` | `VARCHAR(30)` | Boarding Station |
+| `to_station` | `VARCHAR(30)` | Destination Station |
+| `seats_booked` | `INTEGER` | Reserved Seat Count |
+| `total_amount` | `NUMERIC(10,2)` | Total Fare Collected (₹ INR) |
 
 ---
 
-## ⚡ Quick Start Guide
+## ⚡ Quick Start & Deployment
 
 ### Prerequisites
-- **Java Development Kit**: JDK 11 or JDK 17+
-- **Build Tool**: Apache Maven 3.8+ (included or installed)
+- **Java 21 or Java 25 LTS**
+- **Maven 3.9+**
+- **PostgreSQL 16+** (Local or via Docker)
 
-### 1. One-Click Launch (Windows)
-Double-click [`start.bat`](start.bat) or execute via PowerShell:
+### Option A: Launch with Docker Compose (Recommended)
 
+1. **Start PostgreSQL in Docker**:
+   ```bash
+   docker compose up -d
+   ```
+
+2. **Run Spring Boot Application**:
+   ```bash
+   mvn spring-boot:run
+   ```
+
+### Option B: One-Click Launch on Windows
+
+Execute the pre-configured launcher:
 ```powershell
 .\start.ps1
 ```
+Or double-click `start.bat`.
 
-The script automatically:
-1. Configures environment variables.
-2. Compiles and packages the WAR file using Maven if not already built.
-3. Launches the embedded Tomcat runner on port `8080`.
-
-### 2. Manual Terminal Build & Run
+### Option C: Build Executable JAR
 
 ```bash
-# 1. Clone the repository
-git clone https://github.com/Infernapx/TrainTkt.git
-cd TrainTkt
-
-# 2. Compile and package the WAR
+# Compile and build executable fat JAR
 mvn clean package -DskipTests
 
-# 3. Launch with embedded Tomcat runner
-java -jar target/dependency/webapp-runner.jar --port 8080 target/TrainBook-1.0.0-SNAPSHOT.war
+# Run the packaged Spring Boot JAR with Java 25
+java -jar target/traintkt-2.0.0-SNAPSHOT.jar
 ```
 
-### 3. Accessing the Application
-Open your browser and navigate to:
-👉 **[http://localhost:8080/index.html](http://localhost:8080/index.html)**
+Access the application in your browser:
+👉 **[http://localhost:8080/](http://localhost:8080/)**
 
 ---
 
 ## 🔑 Pre-Configured Demo Credentials
 
-The embedded database is pre-seeded with test accounts for instant evaluation:
+The database automatically seeds on first launch:
 
-| Role | Email / Username | Password | Access Level |
+| Role | Username / Email | Password | Access Rights |
 | :--- | :--- | :--- | :--- |
-| **Passenger** | `shashi@demo.com` | `shashi` | Search, Book, View History, Profile |
-| **Administrator** | `admin@demo.com` | `admin` | Add Train, Update Schedule, Cancel Train |
+| **Passenger** | `shashi@demo.com` | `shashi` | Train Search, Booking, PNR Receipts, Booking History |
+| **Administrator** | `admin@demo.com` | `admin` | Fleet Schedules, Add Train, Update Capacities, Cancellation |
 
-### 🚆 Pre-Seeded Trains for Quick Testing
+### 🚆 Sample Pre-Seeded Trains
 - **12367** — `VIKRAMSHILA EXP` (PATNA ➔ ANAND VIHAR) — ₹ 620.00
 - **10001** — `JODHPUR EXP` (HOWRAH ➔ JODHPUR) — ₹ 490.50
 - **10002** — `YAMUNA EXP` (GAYA ➔ DELHI) — ₹ 550.50
@@ -227,74 +234,95 @@ The embedded database is pre-seeded with test accounts for instant evaluation:
 
 ---
 
-## 📡 API & Servlet Endpoint Reference
+## 📡 Web Controller Endpoints Reference
 
-| Endpoint | HTTP Method | Access Role | Description |
+| Endpoint | Method | Security Role | Description |
 | :--- | :---: | :---: | :--- |
-| `/index.html` | `GET` | Public | Welcome portal & unified sign-in screen |
-| `/userlogin` | `POST` | Public | Authenticates passenger and initializes customer session |
-| `/adminlogin` | `POST` | Public | Authenticates administrator and initializes admin session |
-| `/userviewtrainfwd` | `GET` | Customer | Renders live manifest of all running trains |
-| `/searchtrainservlet` | `POST` | Customer | AJAX/Form train lookup by number or name with HUD card response |
-| `/trainbwstn` | `POST` | Customer | Queries direct trains connecting two specified stations |
-| `/useravail` | `POST` | Customer | Checks real-time seat availability for a given train number |
-| `/booktrainbyref` | `GET` | Customer | Initiates direct booking flow from train manifest links |
-| `/payment` | `POST` | Customer | Processes simulated payment and generates PNR ticket |
-| `/bookingdetails` | `GET` | Customer | Retrieves complete booking history for logged-in user |
-| `/addtrainfwd` | `GET` / `POST` | Admin | Displays form and handles registration of a new train |
-| `/updatetrain` | `GET` / `POST` | Admin | Updates existing train fare, stations, or seat quotas |
-| `/cancletrainfwd` | `GET` / `POST` | Admin | Cancels and deletes a train from the operational schedule |
-| `/userlogout` / `/adminlogout` | `GET` | Authenticated | Terminates session and redirects to sign-in portal |
+| `/` or `/index.html` | `GET` | Public | Cyber-Transit portal & unified authentication screen |
+| `/userlogin` | `POST` | Public | Spring Security authentication entrypoint |
+| `/UserRegister.html` | `GET` / `POST` | Public | Passenger registration portal |
+| `/userviewtrainfwd` | `GET` | Passenger | Live express train manifest |
+| `/searchtrainservlet` | `GET` / `POST` | Passenger | Real-time train lookup by number or name |
+| `/trainbwstn` | `GET` / `POST` | Passenger | Station-to-station route finder |
+| `/useravail` | `GET` / `POST` | Passenger | Seat availability enquiry |
+| `/fare` | `GET` / `POST` | Passenger | Fare calculation engine |
+| `/booktrainbyref` | `GET` | Passenger | Direct reservation shortcut from train manifest |
+| `/booktrains` | `POST` | Passenger | Step 1 booking form submission |
+| `/payment` | `POST` | Passenger | Transaction settlement and PNR ticket generation |
+| `/bookingdetails` | `GET` | Passenger | Historical booking records |
+| `/userprofile` | `GET` / `POST` | Passenger | Profile and password management |
+| `/adminhome` | `GET` | Admin | Administrative dashboard |
+| `/adminviewtrainfwd` | `GET` | Admin | Fleet inspection manifest |
+| `/addtrainfwd` | `GET` / `POST` | Admin | Register new express route |
+| `/updatetrain` | `GET` / `POST` | Admin | Update train capacity and pricing |
+| `/cancletrainfwd` | `GET` / `POST` | Admin | Cancel/delete train route |
+| `/userlogout` / `/logout` | `GET` / `POST` | Authenticated | Secure session termination |
 
 ---
 
 ## 📂 Project Directory Structure
 
 ```text
-Train-Ticket-Reservation-System/
-├── src/
-│   ├── application.properties               # Database connection string (H2)
-│   └── com/shashi/
-│       ├── beans/                           # Java Data Transfer Objects (TrainBean, HistoryBean, UserBean)
-│       ├── constant/                        # Roles & Enums (UserRole: CUSTOMER, ADMIN)
-│       ├── service/                         # Service Interfaces & Implementations
-│       │   └── impl/                        # (TrainServiceImpl, BookingServiceImpl, UserServiceImpl)
-│       ├── servlets/                        # HTTP Controllers & Endpoints
-│       │   ├── AdminCancleTrain.java
-│       │   ├── AdminSearchTrain.java
-│       │   ├── BookTrains.java
-│       │   ├── TrainBwStn.java
-│       │   ├── UserLogin.java
-│       │   ├── UserSearchTrain.java
-│       │   └── UserViewTrainFwd.java
-│       └── utility/                         # Database bootstrap (DBUtil) & Helpers (TrainUtil)
-├── WebContent/
-│   ├── UserHome_Css.css                     # Futuristic Cyber-Transit Design System
-│   ├── index.html                           # Landing page & unified login portal
-│   ├── SearchTrains.html                    # Train search with real-time HUD & quick-try chips
-│   ├── TrainBwStn.html                      # Route discovery between stations
-│   ├── BookTrains.html                      # Ticket reservation form
-│   ├── Payment.html                         # Simulated 256-bit SSL checkout sandbox
-│   ├── AdminHome.html                       # System administrator control center
-│   ├── UserHome.html                        # Passenger navigation dashboard
-│   └── WEB-INF/web.xml                      # Servlet mappings & webapp deployment descriptor
-├── pom.xml                                  # Maven dependencies & build configuration
-├── start.bat                                # Windows 1-click execution script
-├── start.ps1                                # PowerShell launch script
-└── README.md                                # Comprehensive documentation
+TrainTkt/
+├── docker-compose.yml                      # PostgreSQL container definition
+├── pom.xml                                 # Modern Maven config (Java 25, Spring Boot 3.3.4)
+├── start.bat                               # Windows 1-click launch batch script
+├── start.ps1                               # PowerShell automated boot script
+├── README.md                               # Modernized project documentation
+└── src/
+    └── main/
+        ├── java/com/shashi/
+        │   ├── TrainApplication.java       # Spring Boot main application entrypoint
+        │   ├── config/
+        │   │   ├── SecurityConfig.java     # Spring Security 6 authorization & password encoder
+        │   │   └── DataInitializer.java    # Automatic DB bootstrap and express train seed
+        │   ├── controller/
+        │   │   └── WebController.java      # Unified Spring MVC Controller
+        │   ├── entity/                     # JPA Hibernate entities
+        │   │   ├── Admin.java
+        │   │   ├── BookingHistory.java
+        │   │   ├── Customer.java
+        │   │   └── Train.java
+        │   ├── repository/                 # Spring Data JPA repositories
+        │   │   ├── AdminRepository.java
+        │   │   ├── BookingHistoryRepository.java
+        │   │   ├── CustomerRepository.java
+        │   │   └── TrainRepository.java
+        │   └── service/                    # Business service layer
+        │       ├── BookingService.java
+        │       ├── TrainService.java
+        │       ├── UserService.java
+        │       └── impl/                   # Implementation with transactional semantics
+        │           ├── BookingServiceImpl.java
+        │           ├── TrainServiceImpl.java
+        │           └── UserServiceImpl.java
+        └── resources/
+            ├── application.properties      # PostgreSQL datasource & Hibernate configuration
+            ├── static/
+            │   └── UserHome_Css.css        # Futuristic Cyber-Transit CSS3 design system
+            └── templates/                  # Modern Thymeleaf HTML5 templates
+                ├── AddTrains.html
+                ├── AdminHome.html
+                ├── AdminUpdateTrain.html
+                ├── AdminViewTrains.html
+                ├── Availability.html
+                ├── BookTrains.html
+                ├── BookingHistory.html
+                ├── BookingSuccess.html
+                ├── CancleTrain.html
+                ├── Fare.html
+                ├── index.html
+                ├── Payment.html
+                ├── SearchTrains.html
+                ├── TrainBwStn.html
+                ├── UserHome.html
+                ├── UserProfile.html
+                ├── UserRegister.html
+                └── UserViewTrains.html
 ```
-
----
-
-## 🔮 Future Roadmap
-
-- [ ] **Dynamic Seat Matrix Map**: Visual interactive coach layout selector (Window / Aisle / Upper / Lower berths).
-- [ ] **Live GPS Train Tracking Simulation**: Real-time position telemetry between stations with arrival estimations.
-- [ ] **Instant PDF Ticket Generation**: Downloadable boarding passes with generated QR codes for ticket validation.
-- [ ] **REST API Layer**: Decouple servlets with modern JSON REST controllers for native mobile client integration.
 
 ---
 
 ## 📜 License
 
-This project is licensed under the [MIT License](LICENSE). Feel free to use, modify, and distribute it for personal, educational, or commercial projects.
+This project is licensed under the [MIT License](LICENSE).
