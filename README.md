@@ -1,225 +1,300 @@
-# Train Ticket Reservation System 
-<!-- - Youtube video for local setup of similar project: https://www.youtube.com/watch?v=mLFPodZO8Iw -->
-- Youtube video for Step by Step Guide on Local Setup: https://www.youtube.com/watch?v=Wd2GlEJJJlw
-<!-- - Live Url: https://traintickets.herokuapp.com <br>  -->
-<!-- - Login Credentials: admin/admin -->
+# NTBS — Cyber-Transit Train Ticket Reservation System
 
-### About:
-This project is about the Train-Ticket-Reservation-System which is used to view Train Schedule, search trains, Seat availability, Train timings. We can also enquire about fare of different trains. We can get information about train between two stations. We can book seats online. This provides a safe and secure seat reservation system. 
-### Online Train Information and Reservation
-<span style="color:blue">**This Website is built for following purpose:-**</span>
-- View Trains Schedule
-- Search Trains
-- Seat Availability
-- Train Timings
-- Fare Enquiry
-- Trains Between Stations
-- Booking seats online.
-- Login and Logout Security
-- Password Changes
-- Payment Gateway
-- Ticket Booking History
+[![Java Version](https://img.shields.io/badge/Java-17%2B-blue.svg?style=flat-square&logo=openjdk)](https://openjdk.org/)
+[![Build Tool](https://img.shields.io/badge/Build-Maven%203.9-C71A36.svg?style=flat-square&logo=apachemaven)](https://maven.apache.org/)
+[![Server](https://img.shields.io/badge/Server-Embedded%20Tomcat%209-F8DC75.svg?style=flat-square&logo=apachetomcat)](https://tomcat.apache.org/)
+[![Database](https://img.shields.io/badge/Database-Embedded%20H2-blueviolet.svg?style=flat-square)](https://www.h2database.com/)
+[![UI Style](https://img.shields.io/badge/Design-Cyber--Transit%20Dark%20HUD-00f0ff.svg?style=flat-square)](https://github.com/Infernapx/Train-Ticket-Reservation-System)
+[![License](https://img.shields.io/badge/License-MIT-green.svg?style=flat-square)](LICENSE)
 
-<span style="color:blue">**The Admin have the following access to this website:-**</span>
-- Login
-- Add Trains
-- Update Trains
-- Remove  or cancle Trains
-- View Trains
-- Profile Edit
-- Logout
+An enterprise-grade, high-performance Railway Reservation System built with **Java Servlets & J2EE**, featuring an embedded zero-configuration **H2 Database** and an extraordinary **Futuristic Cyber-Transit HUD** interface.
 
-<span style="color:blue">**The Users have the following Access:-**</span>
-- Register
-- Login
-- View Trains
-- Check Seat Availability
-- Search Trains
-- Train Avaiablity and Fare Between Stations
-- Books Tickets
-- View Booking History
-- View Profile
-- Update Profile
-- Change Password
-- Logout
+---
 
-### Technologies used:-
-1. Front-End Development:
-- HTML
-- CSS
-- Bootstrap
+## 🌟 Overview & Project Scope
 
-2. Back-End Development
-- Java [J2EE]
-- JDBC
-- Servlet
-- Oracle ( SQL )
+The **National Ticket Booking Spot (NTBS)** reimagines digital train reservation. Designed to replace outdated, cumbersome booking systems, NTBS delivers a lightning-fast, intuitive travel management experience for passengers and railway dispatchers.
 
-### ==== Software And Tools Required ======
-- : Git [https://www.youtube.com/watch?v=gv7VPQ4LZ7g]
-- : Java JDK 8+ [https://www.youtube.com/watch?v=O9PWH9SeTTE]
-- : Eclipse EE [https://www.youtube.com/watch?v=8aDsEV7txXE]
-- : Apache Maven [https://www.youtube.com/watch?v=jd2zx3dLjuw]
-- : Tomcat v8.0+ [https://youtu.be/mLFPodZO8Iw?t=903]
-- : Oracle (SQL) / SQL PLUS [https://www.youtube.com/watch?v=ZYOqykEDSqU]
-- : Oracle SQL Developer [https://www.youtube.com/watch?v=2a1JKIGVtd0]
+### Core Problems Solved
+- **Zero-Setup Database Barrier**: Traditional enterprise Java railway apps rely on complex external Oracle database setups. NTBS ships with a lightweight, embedded **H2 Database** engine that automatically bootstraps schemas and seeds realistic express train schedules on the first launch.
+- **Next-Gen Visual Telemetry**: Replaces flat 2000s-style tables with a glassmorphic **Cyber-Transit UI** featuring animated route track light beams, neon indicators, and high-contrast telemetry panels.
+- **Intelligent Schedule Discovery**: Handles fuzzy train lookups, trimmed whitespace, `#` prefix removal (e.g. `#12367`), and train name queries with instant feedback.
+- **Role-Gated Security**: Strict session authorization cleanly separates regular passenger capabilities from railway administrative oversight.
 
-### ========== Dummy Database Initialization ===========
+---
 
-STEP 1: Open SQL Plus OR SQL Developer
+## 🚀 Key Features
 
-STEP 2: Login and connect to database using administrator username and password
+### 👤 Passenger Portal
+- **Live Running Trains Manifest**: Real-time view of all scheduled trains, routes, current seating availability, and base fares.
+- **Fuzzy Train Search**: Search by 5-digit train number (e.g., `12367`, `10001`) or name (e.g., `Vikramshila`, `Rajdhani`) with one-click quick-search chips.
+- **Station-to-Station Routing**: Query direct routes between any origin and destination junction.
+- **Live Seat Availability & Fare Enquiry**: Instant capacity inspection before booking.
+- **Multi-Class Reservation Engine**: Support for Sleeper (`SL`), Second Sitting (`2S`), AC 3 Tier (`3A`), AC 2 Tier (`2A`), and AC First Class (`1A`).
+- **Simulated 256-Bit SSL Payment Sandbox**: Card checkout simulation with instantaneous booking confirmation and unique PNR/Transaction generation.
+- **Booking History**: Chronological log of all previous journeys, ticket statuses, and amounts paid.
+- **Profile Management**: Account management and password update tools.
 
-STEP 3 :Execute the below command first to create a new user:
+### 🛡️ Admin Command Center
+- **Fleet Schedule Inspector**: Audit the status of all active routes and trains across the railway network.
+- **Add New Routes**: Register new train numbers, originating stations, terminus stations, ticket fares, and maximum seat capacities.
+- **Update Schedules & Capacities**: Dynamically adjust ticket pricing and seat allocation.
+- **Decommission / Cancel Trains**: Safely remove outdated or cancelled trains from the active schedule.
 
-```SQL
+### 🎨 Futuristic Cyber-Transit UI
+- **Cosmic Obsidian Theme**: Deep dark backdrop (`#060913`) accented with multi-layer radial cyan (`#00f0ff`) and violet (`#8b5cf6`) glow meshes.
+- **Glassmorphism HUD**: Translucent frosted panels (`backdrop-filter: blur(24px) saturate(180%)`) with hairline neon cyan borders.
+- **Animated Transit Light Beam**: Pulsing animated electric particle beam (`@keyframes transitBeamFlow`) traveling from origin to destination.
+- **Hologram Action Elements**: Radiant gradient buttons with micro-interactions and reflection sweep animations.
+- **Platform Encoding Compliance**: Fully sanitized for Windows/Linux UTF-8 compatibility, preventing mojibake (`??`) artifacts.
 
-ALTER SESSION SET "_ORACLE_SCRIPT"=TRUE;  
-CREATE USER RESERVATION IDENTIFIED BY MANAGER;
-GRANT DBA TO RESERVATION;
-COMMIT;
+---
 
+## 🛠️ Technology Stack
+
+| Layer | Technologies |
+| :--- | :--- |
+| **Frontend** | HTML5, Vanilla CSS3 (Custom Design System, Tokens, Keyframe Animations), Google Fonts (*Outfit*, *Space Grotesk*, *Plus Jakarta Sans*, *JetBrains Mono*) |
+| **Backend** | Java 17 / J2EE, Java Servlets (`javax.servlet`), MVC Pattern |
+| **Database** | Embedded H2 Database (In-Memory/Persistent file mode, Auto-Bootstrapped via `DBUtil`) |
+| **Server & Packaging** | Apache Maven 3.9+, Embedded Apache Tomcat 9 (`webapp-runner`) |
+| **Security** | HTTP Session Management, Role-Based Access Control (`CUSTOMER` & `ADMIN`) |
+
+---
+
+## 🔄 System Architecture & Flow
+
+```mermaid
+flowchart TD
+    User([Passenger / Administrator]) -->|Access Portal| WebUI[Futuristic Web Interface]
+    
+    subgraph Client Layer
+        WebUI -->|HTTP Requests| Nav[Navigation & Forms]
+        Nav -->|Credentials| Auth[Session Auth Guard]
+    end
+
+    subgraph Servlet Controller Layer
+        Auth -->|Role: CUSTOMER| CustomerServlets[User Servlets\n- UserSearchTrain\n- TrainBwStn\n- BookTrains\n- Payment]
+        Auth -->|Role: ADMIN| AdminServlets[Admin Servlets\n- AddTrain\n- UpdateTrain\n- CancleTrain\n- AdminSearchTrain]
+    end
+
+    subgraph Service & DAO Layer
+        CustomerServlets --> TrainService[TrainServiceImpl]
+        CustomerServlets --> BookingService[BookingServiceImpl]
+        CustomerServlets --> UserService[UserServiceImpl]
+        AdminServlets --> TrainService
+    end
+
+    subgraph Data Layer
+        TrainService --> DBUtil[(Embedded H2 Database\n./data/traindb)]
+        BookingService --> DBUtil
+        UserService --> DBUtil
+    end
 ```
-NOTE: If the above command fails for alter session issues, try to remove first line and then execute it.
 
-STEP 4: Now execute the below sql query in same terminal
+### Booking Lifecycle Flow
 
-```SQL
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Passenger
+    participant Servlet as UserSearchTrain / TrainBwStn
+    participant Service as TrainServiceImpl
+    participant DB as Embedded H2 Database
+    participant Payment as Payment Servlet
+    participant Booking as BookingServiceImpl
 
-CONNECT RESERVATION/MANAGER;
-CREATE TABLE "RESERVATION"."CUSTOMER" 
-(	
-"MAILID" VARCHAR2(40) PRIMARY KEY, 
-"PWORD" VARCHAR2(20) NOT NULL, 
-"FNAME" VARCHAR2(20) NOT NULL, 
-"LNAME" VARCHAR2(20), 
-"ADDR" VARCHAR2(100), 
-"PHNO" NUMBER(12) NOT NULL
-);
+    Passenger->>Servlet: Search Train / Route (e.g. 12367)
+    Servlet->>Service: getTrainByIdOrName("12367")
+    Service->>DB: Query TRAIN table
+    DB-->>Service: Return Train details (Seats, Fare, Stations)
+    Service-->>Servlet: TrainBean Record
+    Servlet-->>Passenger: Render HUD Result Card with Animated Route Beam
 
-CREATE TABLE "RESERVATION"."ADMIN"
-(	
-"MAILID" VARCHAR2(40) PRIMARY KEY, 
-"PWORD" VARCHAR2(20) NOT NULL, 
-"FNAME" VARCHAR2(20) NOT NULL, 
-"LNAME" VARCHAR2(20), 
-"ADDR" VARCHAR2(100), 
-"PHNO" NUMBER(12) NOT NULL
-);
-
-
-CREATE TABLE "RESERVATION"."TRAIN" 
-(	
-"TR_NO" NUMBER(10) PRIMARY KEY, 
-"TR_NAME" VARCHAR2(70) NOT NULL, 
-"FROM_STN" VARCHAR2(20) NOT NULL, 
-"TO_STN" VARCHAR2(20) NOT NULL, 
-"SEATS" NUMBER(4) NOT NULL, 
-"FARE" NUMBER(6,2) NOT NULL 
-);
-
-CREATE TABLE "RESERVATION"."HISTORY" 
-(	
-"TRANSID" VARCHAR2(36) PRIMARY KEY, 
-"MAILID" VARCHAR2(40) REFERENCES "RESERVATION"."CUSTOMER"(MAILID), 
-"TR_NO" NUMBER(10),
-"DATE" DATE,
-"FROM_STN" VARCHAR2(20) NOT NULL, 
-"TO_STN" VARCHAR2(20) NOT NULL, 
-"SEATS" NUMBER(3) NOT NULL, 
-"AMOUNT" NUMBER(8,2) NOT NULL
-);
-
-COMMIT;
-
-INSERT INTO RESERVATION.ADMIN VALUES('admin@demo.com','admin','System','Admin','Demo Address 123 colony','9874561230');
-INSERT INTO RESERVATION.CUSTOMER VALUES('shashi@demo.com','shashi','Shashi','Raj','Kolkata, West Bengal',954745222);
-
-INSERT INTO RESERVATION.TRAIN VALUES(10001,'JODHPUR EXP','HOWRAH','JODHPUR', 152, 490.50);
-INSERT INTO RESERVATION.TRAIN VALUES(10002,'YAMUNA EXP','GAYA','DELHI', 52, 550.50);
-INSERT INTO RESERVATION.TRAIN VALUES(10003,'NILANCHAL EXP','GAYA','HOWRAH', 92, 451);
-INSERT INTO RESERVATION.TRAIN VALUES(10004,'JAN SATABDI EXP','RANCHI','PATNA', 182, 550);
-INSERT INTO RESERVATION.TRAIN VALUES(10005,'GANGE EXP','MUMBAI','KERALA', 12, 945);
-INSERT INTO RESERVATION.TRAIN VALUES(10006,'GARIB RATH EXP','PATNA','DELHI', 1, 1450.75);
-
-INSERT INTO RESERVATION.HISTORY VALUES('BBC374-NSDF-4673','shashi@demo.com',10001,TO_DATE('02-FEB-2024'), 'HOWRAH', 'JODHPUR', 2, 981);
-INSERT INTO RESERVATION.HISTORY VALUES('BBC375-NSDF-4675','shashi@demo.com',10004,TO_DATE('12-JAN-2024'), 'RANCHI', 'PATNA', 1, 550);
-INSERT INTO RESERVATION.HISTORY VALUES('BBC373-NSDF-4674','shashi@demo.com',10006,TO_DATE('22-JULY-2024'), 'PATNA', 'DELHI', 3, 4352.25);
-
-COMMIT;
+    Passenger->>Payment: Select Date, Class, Passengers -> Checkout
+    Payment-->>Passenger: Render Simulated 256-Bit SSL Gateway
+    Passenger->>Payment: Submit Payment
+    Payment->>Booking: transId, userMail, trainNo, seats, fare
+    Booking->>DB: Deduct Seats & INSERT INTO HISTORY
+    DB-->>Booking: Transaction Committed
+    Booking-->>Passenger: Issue Confirmed Ticket with PNR & Seat Allocation
 ```
-STEP 5: Now Execute the below query one by one to check if the tables are created successfully
-```SQL
-SELECT * FROM ADMIN;
-SELECT * FROM CUSTOMER;
-SELECT * FROM TRAIN;
-SELECT * FROM HISTORY;
 
+---
+
+## 🗄️ Database Schema & Seed Data
+
+The database initializes automatically when the application starts (`DBUtil.java`).
+
+### 1. `TRAIN`
+| Column | Type | Description |
+| :--- | :--- | :--- |
+| `TR_NO` | `BIGINT PRIMARY KEY` | Unique Train Number (e.g. `12367`, `10001`) |
+| `TR_NAME` | `VARCHAR(70)` | Train Name (e.g. `VIKRAMSHILA EXP`, `RAJDHANI EXP`) |
+| `FROM_STN` | `VARCHAR(20)` | Origin Station (e.g. `PATNA`, `HOWRAH`) |
+| `TO_STN` | `VARCHAR(20)` | Terminus Station (e.g. `ANAND VIHAR`, `DELHI`) |
+| `SEATS` | `INT` | Total Available Seats |
+| `FARE` | `DECIMAL(6,2)` | Base Ticket Price (₹ INR) |
+
+### 2. `CUSTOMER`
+| Column | Type | Description |
+| :--- | :--- | :--- |
+| `MAILID` | `VARCHAR(40) PRIMARY KEY` | User Email / Login ID |
+| `PWORD` | `VARCHAR(20)` | Account Password |
+| `FNAME` | `VARCHAR(20)` | First Name |
+| `LNAME` | `VARCHAR(20)` | Last Name |
+| `ADDR` | `VARCHAR(100)` | Address |
+| `PHNO` | `BIGINT` | Contact Number |
+
+### 3. `ADMIN`
+| Column | Type | Description |
+| :--- | :--- | :--- |
+| `MAILID` | `VARCHAR(40) PRIMARY KEY` | Administrator Email ID |
+| `PWORD` | `VARCHAR(20)` | Administrator Password |
+| `FNAME` | `VARCHAR(20)` | First Name |
+| `LNAME` | `VARCHAR(20)` | Last Name |
+| `ADDR` | `VARCHAR(100)` | Address |
+| `PHNO` | `BIGINT` | Contact Number |
+
+### 4. `HISTORY`
+| Column | Type | Description |
+| :--- | :--- | :--- |
+| `TRANSID` | `VARCHAR(36) PRIMARY KEY` | PNR / Unique Transaction Identifier |
+| `MAILID` | `VARCHAR(40)` | Booking Customer ID (Foreign Key) |
+| `TR_NO` | `BIGINT` | Reserved Train Number |
+| `DATE` | `DATE` | Date of Journey |
+| `FROM_STN` | `VARCHAR(20)` | Boarding Station |
+| `TO_STN` | `VARCHAR(20)` | Deboarding Station |
+| `SEATS` | `INT` | Number of Reserved Seats |
+| `AMOUNT` | `DECIMAL(8,2)` | Total Fare Paid (₹ INR) |
+
+---
+
+## ⚡ Quick Start Guide
+
+### Prerequisites
+- **Java Development Kit**: JDK 11 or JDK 17+
+- **Build Tool**: Apache Maven 3.8+ (included or installed)
+
+### 1. One-Click Launch (Windows)
+Double-click [`start.bat`](start.bat) or execute via PowerShell:
+
+```powershell
+.\start.ps1
 ```
-Note: If any of the above commands fails, please try to fix it first and then proceed to next step
-	
-### ====== Importing and Running the Project Through Eclipse EE ===========
-Step 0: Open Eclipse Enterprise Edition. [Install if not available](https://www.youtube.com/watch?v=8aDsEV7txXE)
 
-Step 1: Click On File > Import > Git > Projects From Git > Clone Uri  > Paste The Repository Url: ```https://github.com/shashirajraja/Train-Ticket-Reservation-System.git``` > Next > Select Master Branch > Next > Finish
+The script automatically:
+1. Configures environment variables.
+2. Compiles and packages the WAR file using Maven if not already built.
+3. Launches the embedded Tomcat runner on port `8080`.
 
-Step 2.A: Right Click on Project > Run as > Maven Build > In the goals field enter "clean install" > apply > run
+### 2. Manual Terminal Build & Run
 
-Step 2.B: Right Click On Project > Build Path > Configure Build Path > Libraries > Remove And Update Any Libraries With Red Mark > Finish
+```bash
+# 1. Clone the repository
+git clone https://github.com/Infernapx/Train-Ticket-Reservation-System.git
+cd Train-Ticket-Reservation-System
 
-Step 3: [Only if Tomcat v8.0 is not Configured in Eclipse]: Right Click On Project > Run As > Run On Server > Select Tomcat v8.0 > (Select Tomcat V8.0 Installation Location If Asked) Next > Add <project-name> > Finish
+# 2. Compile and package the WAR
+mvn clean package -DskipTests
 
-Step 4: In The Server Tab > Double Click On Tomcat Server > Ports  > Change The Port Number For Http/1.1 To 8083 > Close And Save
+# 3. Launch with embedded Tomcat runner
+java -jar target/dependency/webapp-runner.jar --port 8080 target/TrainBook-1.0.0-SNAPSHOT.war
+```
 
-Step 5: Right Click On Project > Run As > Run On Server > Select Tomcat V8.0 > Next > Add All> Done
+### 3. Accessing the Application
+Open your browser and navigate to:
+👉 **[http://localhost:8080/index.html](http://localhost:8080/index.html)**
 
-Step 6: Check Running The Site At  <a Href="Http://localhost:8083/trainbook/">http://localhost:8083/trainbook/</a>
+---
 
-Step 7: Default Username And Password For Admin Is "admin@demo.com" And "admin"
+## 🔑 Pre-Configured Demo Credentials
 
-Step 8: Default Username And Password For User Is "shashi@demo.com" And "shashi"
+The embedded database is pre-seeded with test accounts for instant evaluation:
 
+| Role | Email / Username | Password | Access Level |
+| :--- | :--- | :--- | :--- |
+| **Passenger** | `shashi@demo.com` | `shashi` | Search, Book, View History, Profile |
+| **Administrator** | `admin@demo.com` | `admin` | Add Train, Update Schedule, Cancel Train |
 
+### 🚆 Pre-Seeded Trains for Quick Testing
+- **12367** — `VIKRAMSHILA EXP` (PATNA ➔ ANAND VIHAR) — ₹ 620.00
+- **10001** — `JODHPUR EXP` (HOWRAH ➔ JODHPUR) — ₹ 490.50
+- **10002** — `YAMUNA EXP` (GAYA ➔ DELHI) — ₹ 550.50
+- **10103** — `MAHABODHI EXP` (GAYA ➔ DELHI) — ₹ 840.00
+- **12301** — `RAJDHANI EXP` (HOWRAH ➔ NEW DELHI) — ₹ 1,850.00
+- **10010** — `VANDE BHARAT EXP` (NEW DELHI ➔ VARANASI) — ₹ 1,750.00
 
-### The Screenshots of some of the  webPages of this project are Here:
+---
 
-1. Login Page
-<img width="100%" alt="Login to Book Trains" src="https://user-images.githubusercontent.com/34605595/232219369-85b55a1d-6640-4821-941a-dcca08036fbe.png">
+## 📡 API & Servlet Endpoint Reference
 
-2. Register New User
-<img width="100%" alt="Register New User" src="https://user-images.githubusercontent.com/34605595/232219485-2b00949a-be20-44f7-b6c1-107213221f94.png">
+| Endpoint | HTTP Method | Access Role | Description |
+| :--- | :---: | :---: | :--- |
+| `/index.html` | `GET` | Public | Welcome portal & unified sign-in screen |
+| `/userlogin` | `POST` | Public | Authenticates passenger and initializes customer session |
+| `/adminlogin` | `POST` | Public | Authenticates administrator and initializes admin session |
+| `/userviewtrainfwd` | `GET` | Customer | Renders live manifest of all running trains |
+| `/searchtrainservlet` | `POST` | Customer | AJAX/Form train lookup by number or name with HUD card response |
+| `/trainbwstn` | `POST` | Customer | Queries direct trains connecting two specified stations |
+| `/useravail` | `POST` | Customer | Checks real-time seat availability for a given train number |
+| `/booktrainbyref` | `GET` | Customer | Initiates direct booking flow from train manifest links |
+| `/payment` | `POST` | Customer | Processes simulated payment and generates PNR ticket |
+| `/bookingdetails` | `GET` | Customer | Retrieves complete booking history for logged-in user |
+| `/addtrainfwd` | `GET` / `POST` | Admin | Displays form and handles registration of a new train |
+| `/updatetrain` | `GET` / `POST` | Admin | Updates existing train fare, stations, or seat quotas |
+| `/cancletrainfwd` | `GET` / `POST` | Admin | Cancels and deletes a train from the operational schedule |
+| `/userlogout` / `/adminlogout` | `GET` | Authenticated | Terminates session and redirects to sign-in portal |
 
-3. User Profile
-<img width="100%" alt="View User Profile" src="https://user-images.githubusercontent.com/34605595/232219729-2720e50f-e14b-4253-831a-85c59e3054b3.png">
+---
 
-4. Search Trains Between Stations
-<img width="100%" alt="Search Trains Between Stations" src="https://user-images.githubusercontent.com/34605595/232220357-54b634d6-afae-427c-b3af-57b372b70906.png">
+## 📂 Project Directory Structure
 
-5. View Trains
-<img width="100%" alt="View Available Trains" src="https://user-images.githubusercontent.com/34605595/232219905-983eeefe-977b-40ad-a695-4ec577272dcc.png">
+```text
+Train-Ticket-Reservation-System/
+├── src/
+│   ├── application.properties               # Database connection string (H2)
+│   └── com/shashi/
+│       ├── beans/                           # Java Data Transfer Objects (TrainBean, HistoryBean, UserBean)
+│       ├── constant/                        # Roles & Enums (UserRole: CUSTOMER, ADMIN)
+│       ├── service/                         # Service Interfaces & Implementations
+│       │   └── impl/                        # (TrainServiceImpl, BookingServiceImpl, UserServiceImpl)
+│       ├── servlets/                        # HTTP Controllers & Endpoints
+│       │   ├── AdminCancleTrain.java
+│       │   ├── AdminSearchTrain.java
+│       │   ├── BookTrains.java
+│       │   ├── TrainBwStn.java
+│       │   ├── UserLogin.java
+│       │   ├── UserSearchTrain.java
+│       │   └── UserViewTrainFwd.java
+│       └── utility/                         # Database bootstrap (DBUtil) & Helpers (TrainUtil)
+├── WebContent/
+│   ├── UserHome_Css.css                     # Futuristic Cyber-Transit Design System
+│   ├── index.html                           # Landing page & unified login portal
+│   ├── SearchTrains.html                    # Train search with real-time HUD & quick-try chips
+│   ├── TrainBwStn.html                      # Route discovery between stations
+│   ├── BookTrains.html                      # Ticket reservation form
+│   ├── Payment.html                         # Simulated 256-bit SSL checkout sandbox
+│   ├── AdminHome.html                       # System administrator control center
+│   ├── UserHome.html                        # Passenger navigation dashboard
+│   └── WEB-INF/web.xml                      # Servlet mappings & webapp deployment descriptor
+├── pom.xml                                  # Maven dependencies & build configuration
+├── start.bat                                # Windows 1-click execution script
+├── start.ps1                                # PowerShell launch script
+└── README.md                                # Comprehensive documentation
+```
 
-7. Book Trains
-<img width="100%" alt="Book Trains Project" src="https://user-images.githubusercontent.com/34605595/232220107-415b251f-90b9-4e70-aff8-e94d370927f6.png">
+---
 
-8. Payment Gateway
-<img width="100%" alt="Pay to Book Trains" src="https://user-images.githubusercontent.com/34605595/232220744-351c2c6d-e1f6-49ad-a11b-7680aa63dbe3.png">
+## 🔮 Future Roadmap
 
-9. Booked Ticket Information
-<img width="100%" alt="Show Booked Ticket Details" src="https://user-images.githubusercontent.com/34605595/232220935-654bda38-cbde-4203-84b8-3078a32ac6ec.png">
+- [ ] **Dynamic Seat Matrix Map**: Visual interactive coach layout selector (Window / Aisle / Upper / Lower berths).
+- [ ] **Live GPS Train Tracking Simulation**: Real-time position telemetry between stations with arrival estimations.
+- [ ] **Instant PDF Ticket Generation**: Downloadable boarding passes with generated QR codes for ticket validation.
+- [ ] **REST API Layer**: Decouple servlets with modern JSON REST controllers for native mobile client integration.
 
-10. Ticket Booking History
-<img width="100%" alt="All Ticket Booking History" src="https://user-images.githubusercontent.com/34605595/232220491-3e7996cb-a54c-4375-a35a-6ab1d211a001.png">
+---
 
-11. Fare Enquiry
-<img alt="Fare Enquiry between stations" src="https://github.com/shashirajraja/Train-Ticket-Reservation-System/blob/master/Screenshots/fareenquiry.png" width="100%">
+## 📜 License
 
-12. Change Password
-<img alt="Change user Password" src="https://github.com/shashirajraja/Train-Ticket-Reservation-System/blob/master/Screenshots/passwordchange.png" width="100%">
-
-13. Add Trains By Admin
-<img alt="Admin Home" src="https://github.com/shashirajraja/Train-Ticket-Reservation-System/blob/master/Screenshots/addtrains.png" width="100%">
-
-
-#### "Suggestions and project Improvement are Invited"
-#### Shashi Raj
-##### Project Leader
+This project is licensed under the [MIT License](LICENSE). Feel free to use, modify, and distribute it for personal, educational, or commercial projects.
