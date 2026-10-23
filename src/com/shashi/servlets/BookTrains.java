@@ -40,12 +40,21 @@ public class BookTrains extends HttpServlet {
 		rd.include(req, res);
 
 		ServletContext sct = req.getServletContext();
+		javax.servlet.http.HttpSession session = req.getSession();
 
 		try {
-			int seat = (int) sct.getAttribute("seats");
-			String trainNo = (String) sct.getAttribute("trainnumber");
-			String journeyDate = (String) sct.getAttribute("journeydate");
-			String seatClass = (String) sct.getAttribute("class");
+			Object seatObj = session.getAttribute("seats");
+			if (seatObj == null) seatObj = sct.getAttribute("seats");
+			int seat = (seatObj instanceof Integer) ? (Integer) seatObj : Integer.parseInt(seatObj.toString());
+
+			String trainNo = (String) session.getAttribute("trainnumber");
+			if (trainNo == null) trainNo = (String) sct.getAttribute("trainnumber");
+
+			String journeyDate = (String) session.getAttribute("journeydate");
+			if (journeyDate == null) journeyDate = (String) sct.getAttribute("journeydate");
+
+			String seatClass = (String) session.getAttribute("class");
+			if (seatClass == null) seatClass = (String) sct.getAttribute("class");
 
 			String userMailId = TrainUtil.getCurrentUserEmail(req);
 
@@ -111,10 +120,17 @@ public class BookTrains extends HttpServlet {
 			throw new TrainException(422, this.getClass().getName() + "_FAILED", e.getMessage());
 		}
 
+		session.removeAttribute("seats");
+		session.removeAttribute("trainnumber");
+		session.removeAttribute("journeydate");
+		session.removeAttribute("class");
+		sct.removeAttribute("seats");
+		sct.removeAttribute("trainnumber");
+		sct.removeAttribute("journeydate");
+		sct.removeAttribute("class");
 		sct.removeAttribute("seat");
 		sct.removeAttribute("trainNo");
 		sct.removeAttribute("journeyDate");
-		sct.removeAttribute("class");
 	}
 
 }

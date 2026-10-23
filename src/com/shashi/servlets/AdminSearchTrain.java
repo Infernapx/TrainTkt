@@ -20,43 +20,86 @@ import com.shashi.utility.TrainUtil;
 @SuppressWarnings("serial")
 @WebServlet("/adminsearchtrain")
 public class AdminSearchTrain extends HttpServlet {
-
 	private TrainService trainService = new TrainServiceImpl();
 
-	/**
-	 * 
-	 * @param req
-	 * @param res
-	 * @throws IOException
-	 * @throws ServletException
-	 */
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
-		res.setContentType("text/html");
+		res.setContentType("text/html;charset=UTF-8");
 		PrintWriter pw = res.getWriter();
 		TrainUtil.validateUserAuthorization(req, UserRole.ADMIN);
 		try {
 			String trainNo = req.getParameter("trainnumber");
-			TrainBean train = trainService.getTrainById(trainNo);
+			TrainBean train = (trainNo != null && !trainNo.trim().isEmpty())
+					? trainService.getTrainById(trainNo.trim())
+					: null;
+
+			boolean isAjax = "true".equalsIgnoreCase(req.getParameter("ajax"))
+					|| "XMLHttpRequest".equalsIgnoreCase(req.getHeader("X-Requested-With"));
+
+			if (!isAjax) {
+				RequestDispatcher rd = req.getRequestDispatcher("AdminSearchTrain.html");
+				rd.include(req, res);
+				pw.println("<div style='max-width:900px; margin: 0 auto 24px auto; width:100%;'>");
+			}
+
 			if (train != null) {
-				RequestDispatcher rd = req.getRequestDispatcher("AdminSearchTrain.html");
-				rd.include(req, res);
-				pw.println("<div class='main'><p1 class='menu'>Searched Train Detail</p1></div>");
-				pw.println("<div class='tab'>" + "<table>" + "<tr><td class='blue'>Train Name :</td><td>"
-						+ train.getTr_name() + "</td></tr>" + "<tr><td class='blue'>Train Number :</td><td>"
-						+ train.getTr_no() + "</td></tr>" + "<tr><td class='blue'>From Station :</td><td>"
-						+ train.getFrom_stn() + "</td></tr>" + "<tr><td class='blue'>To Station :</td><td>"
-						+ train.getTo_stn() + "</td></tr>" + "<tr><td class='blue'>Available Seats:</td><td>"
-						+ train.getSeats() + "</td></tr>" + "<tr><td class='blue'>Fare (INR) :</td><td>"
-						+ train.getFare() + " RS</td></tr>" + "</table>" + "</div>");
+				pw.println("<div class='train-result-card'>"
+						+ "  <div class='train-result-header'>"
+						+ "    <div class='train-identity'>"
+						+ "      <span class='train-number-badge'>#" + train.getTr_no() + "</span>"
+						+ "      <h3 class='train-name'>" + train.getTr_name() + "</h3>"
+						+ "    </div>"
+						+ "    <span class='status-badge-active'>&#9679; Admin Control</span>"
+						+ "  </div>"
+						+ "  <div class='train-route-visual'>"
+						+ "    <div class='route-point'>"
+						+ "      <span class='route-city'>" + train.getFrom_stn() + "</span>"
+						+ "      <span class='route-label'>Departure Station</span>"
+						+ "    </div>"
+						+ "    <div class='route-path'>"
+						+ "      <div class='path-line'></div>"
+						+ "      <span class='path-icon'>&#128646;</span>"
+						+ "    </div>"
+						+ "    <div class='route-point' style='text-align: right;'>"
+						+ "      <span class='route-city'>" + train.getTo_stn() + "</span>"
+						+ "      <span class='route-label'>Destination Station</span>"
+						+ "    </div>"
+						+ "  </div>"
+						+ "  <div class='train-meta-grid'>"
+						+ "    <div class='meta-item'>"
+						+ "      <span class='meta-label'>Total Seats</span>"
+						+ "      <span class='meta-val seats-val'>&#128186; " + train.getSeats() + " Seats</span>"
+						+ "    </div>"
+						+ "    <div class='meta-item'>"
+						+ "      <span class='meta-label'>Fare Rate</span>"
+						+ "      <span class='meta-val fare-val'>&#8377; " + train.getFare() + "</span>"
+						+ "    </div>"
+						+ "    <div class='meta-item' style='display:flex; justify-content:flex-end; gap:8px;'>"
+						+ "      <a href='adminupdatetrain?trainnumber=" + train.getTr_no() + "' class='btn-book-primary'>Edit / Update Train &#9998;</a>"
+						+ "    </div>"
+						+ "  </div>"
+						+ "</div>");
 			} else {
-				RequestDispatcher rd = req.getRequestDispatcher("AdminSearchTrain.html");
-				rd.include(req, res);
-				pw.println("<div class='tab'><p1 class='menu'>Train No." + trainNo + " is Not Available !</p1></div>");
+				String searched = (trainNo != null && !trainNo.trim().isEmpty()) ? trainNo.trim() : "Unknown";
+				pw.println("<div class='alert-card-danger'>"
+						+ "  <div class='alert-card-icon'>&#9888;</div>"
+						+ "  <div style='flex:1;'>"
+						+ "    <div class='alert-card-title'>Train Not Found</div>"
+						+ "    <div class='alert-card-desc'>Train No. <strong>" + searched + "</strong> is currently not in the system database. Check <a href='adminviewtrainfwd' style='color:#1d4ed8; font-weight:700; text-decoration:underline;'>View Trains</a> to inspect all active schedules.</div>"
+						+ "    <div style='margin-top:12px; display:flex; gap:8px; align-items:center; flex-wrap:wrap;'>"
+						+ "      <span style='font-size:12px; font-weight:700; color:#991b1b;'>Suggested Trains:</span>"
+						+ "      <a href='javascript:void(0)' onclick='adminQuickSearch(\"10001\")' class='quick-link-pill'>10001 (Jodhpur Exp)</a>"
+						+ "      <a href='javascript:void(0)' onclick='adminQuickSearch(\"10002\")' class='quick-link-pill'>10002 (Yamuna Exp)</a>"
+						+ "      <a href='javascript:void(0)' onclick='adminQuickSearch(\"10004\")' class='quick-link-pill'>10004 (Jan Satabdi)</a>"
+						+ "    </div>"
+						+ "  </div>"
+						+ "</div>");
+			}
+
+			if (!isAjax) {
+				pw.println("</div>");
 			}
 		} catch (Exception e) {
 			throw new TrainException(422, this.getClass().getName() + "_FAILED", e.getMessage());
 		}
-
 	}
-
 }

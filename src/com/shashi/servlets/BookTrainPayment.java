@@ -28,6 +28,11 @@ public class BookTrainPayment extends HttpServlet {
 		String trainNo = req.getParameter("trainnumber");
 		String journeyDate = req.getParameter("journeydate");
 		String seatClass = req.getParameter("class");
+		javax.servlet.http.HttpSession session = req.getSession();
+		session.setAttribute("seats", seat);
+		session.setAttribute("trainnumber", trainNo);
+		session.setAttribute("journeydate", journeyDate);
+		session.setAttribute("class", seatClass);
 		ServletContext sct = req.getServletContext();
 		sct.setAttribute("seats", seat);
 		sct.setAttribute("trainnumber", trainNo);

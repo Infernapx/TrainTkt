@@ -1,68 +1,45 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="ISO-8859-1">
-<title>E-Trains</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trains Between Stations | National Ticket Booking Spot</title>
 <link rel="stylesheet" href="UserHome_Css.css">
 </head>
 <body>
 	<header>
 		<h1 class="hd">National Ticket Booking Spot</h1>
-		<div class="home">
-			<p class="menu">
-				<a href="userhome">Home</a>
-			</p>
-		</div>
-		<div class="home">
-			<p class="menu">
-				<a href="userviewtrainfwd">View Trains</a>
-			</p>
-		</div>
-		<div class="home">
-			<p class="menu">
-				<a href="trainbwstnfwd">Trains Between Stations</a>
-			</p>
-		</div>
-		<div class="home">
-			<p class="menu">
-				<a href="bookingdetails">Ticket Booking History</a>
-			</p>
-		</div>
-		<div class="home">
-			<p class="menu">
-				<a href="fareenqfwd">Fare Enquiry</a>
-			</p>
-		</div>
-		<div class="home">
-			<p class="menu">
-				<a href="useravailfwd">Seat Availability</a>
-			</p>
-		</div>
-		<div class="home">
-			<p class="menu">
-				<a href="usersearchtrain">Search By TrainNo</a>
-			</p>
-		</div>
-		<div class="home">
-			<p class="menu">
-				<a href="userprofile">Profile</a>
-			</p>
-		</div>
-		<div class="home">
-			<p class="menu">
-				<a href="userlogout">Logout</a>
-			</p>
+		<div style="display: flex; flex-wrap: wrap; gap: 8px;">
+			<div class="home"><p class="menu"><a href="userhome">Home</a></p></div>
+			<div class="home"><p class="menu"><a href="userviewtrainfwd">View Trains</a></p></div>
+			<div class="home"><p class="menu"><a href="trainbwstnfwd">Trains Between Stations</a></p></div>
+			<div class="home"><p class="menu"><a href="bookingdetails">Booking History</a></p></div>
+			<div class="home"><p class="menu"><a href="fareenqfwd">Fare Enquiry</a></p></div>
+			<div class="home"><p class="menu"><a href="useravailfwd">Seat Availability</a></p></div>
+			<div class="home"><p class="menu"><a href="usersearchtrain">Search by TrainNo</a></p></div>
+			<div class="home"><p class="menu"><a href="userprofile">Profile</a></p></div>
+			<div class="home"><p class="menu"><a href="userlogout" style="color: #dc2626;">Logout</a></p></div>
 		</div>
 	</header>
-	<div class="tab">
-		<p class="menu">Trains Between Stations</p>
-	</div>
-	<form action="trainbwstn" class="tab red" method="post">
-		From Station: <input type="text" name="fromstation"><br />
-		<br /> To Station: <input type="text" name="tostation"><br />
-		<br /> <input type="submit" value=" SEARCH TRAIN "><br />
-	</form>
-	<br />
 
+	<div class="tab">
+		<h2 style="font-family: 'Outfit', sans-serif; font-size: 22px; font-weight: 700; color: #0f172a; margin-bottom: 8px;">Search Trains Between Stations</h2>
+		<p style="color: var(--text-muted); font-size: 14px; margin-bottom: 20px;">Enter boarding and destination stations to find available routes and timetables.</p>
+
+		<form action="trainbwstn" method="post">
+			<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+				<div class="form-group">
+					<label class="form-label">From Station</label>
+					<input type="text" name="fromstation" placeholder="e.g. HOWRAH, PATNA, GAYA" required>
+				</div>
+				<div class="form-group">
+					<label class="form-label">To Station</label>
+					<input type="text" name="tostation" placeholder="e.g. JODHPUR, DELHI, RANCHI" required>
+				</div>
+			</div>
+
+			<input type="submit" value="Find Available Trains">
+		</form>
+	</div>
 </body>
 </html>

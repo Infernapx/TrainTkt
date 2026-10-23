@@ -52,14 +52,18 @@ public class BookingServiceImpl implements BookingService {
 	@Override
 	public HistoryBean createHistory(HistoryBean details) throws TrainException {
 		HistoryBean history = null;
-		String query = "INSERT INTO HISTORY VALUES(?,?,?,?,?,?,?,?)";
+		String query = "INSERT INTO HISTORY (TRANSID, MAILID, TR_NO, \"DATE\", FROM_STN, TO_STN, SEATS, AMOUNT) VALUES(?,?,?,?,?,?,?,?)";
 		try {
 			Connection con = DBUtil.getConnection();
 			PreparedStatement ps = con.prepareStatement(query);
 			String transactionId = UUID.randomUUID().toString();
 			ps.setString(1, transactionId);
 			ps.setString(2, details.getMailId());
-			ps.setString(3, details.getTr_no());
+			try {
+				ps.setLong(3, Long.parseLong(details.getTr_no()));
+			} catch (NumberFormatException e) {
+				ps.setLong(3, 0L);
+			}
 			ps.setString(4, details.getDate());
 			ps.setString(5, details.getFrom_stn());
 			ps.setString(6, details.getTo_stn());

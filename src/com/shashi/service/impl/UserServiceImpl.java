@@ -85,7 +85,10 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public String updateUser(UserBean customer) {
 		String responseCode = ResponseCode.FAILURE.toString();
-		String query = "UPDATE  " + TABLE_NAME + " SET FNAME=?,LNAME=?,ADDR=?,PHNO=? WHERE MAILID=?";
+		boolean updatePassword = customer.getPWord() != null && !customer.getPWord().trim().isEmpty();
+		String query = updatePassword
+				? "UPDATE " + TABLE_NAME + " SET FNAME=?,LNAME=?,ADDR=?,PHNO=?,PWORD=? WHERE MAILID=?"
+				: "UPDATE " + TABLE_NAME + " SET FNAME=?,LNAME=?,ADDR=?,PHNO=? WHERE MAILID=?";
 		try {
 			Connection con = DBUtil.getConnection();
 			PreparedStatement ps = con.prepareStatement(query);
@@ -93,7 +96,12 @@ public class UserServiceImpl implements UserService {
 			ps.setString(2, customer.getLName());
 			ps.setString(3, customer.getAddr());
 			ps.setLong(4, customer.getPhNo());
-			ps.setString(5, customer.getMailId());
+			if (updatePassword) {
+				ps.setString(5, customer.getPWord());
+				ps.setString(6, customer.getMailId());
+			} else {
+				ps.setString(5, customer.getMailId());
+			}
 			int response = ps.executeUpdate();
 			if (response > 0) {
 				responseCode = ResponseCode.SUCCESS.toString();
@@ -138,13 +146,14 @@ public class UserServiceImpl implements UserService {
 			ps.setString(4, customer.getLName());
 			ps.setString(5, customer.getAddr());
 			ps.setLong(6, customer.getPhNo());
-			ResultSet rs = ps.executeQuery();
-			if (rs.next()) {
+			int response = ps.executeUpdate();
+			if (response > 0) {
 				responseCode = ResponseCode.SUCCESS.toString();
 			}
 			ps.close();
 		} catch (SQLException | TrainException e) {
-			if (e.getMessage().toUpperCase().contains("ORA-00001")) {
+			String msg = e.getMessage().toUpperCase();
+			if (msg.contains("ORA-00001") || msg.contains("UNIQUE") || msg.contains("PRIMARY KEY")) {
 				responseCode += " : " + "User With Id: " + customer.getMailId() + " is already registered ";
 			} else {
 				responseCode += " : " + e.getMessage();

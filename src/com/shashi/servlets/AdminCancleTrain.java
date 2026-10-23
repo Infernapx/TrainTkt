@@ -43,12 +43,24 @@ public class AdminCancleTrain extends HttpServlet {
 			if (ResponseCode.SUCCESS.toString().equalsIgnoreCase(message)) {
 				RequestDispatcher rd = req.getRequestDispatcher("CancleTrain.html");
 				rd.include(req, res);
-				pw.println("<div class='main'><p1 class='menu'>Train number " + trainNo
-						+ " has been Deleted Successfully.</p1></div>");
+				pw.println("<div style='max-width:900px; margin: 12px auto; width:100%;'>"
+						+ "<div class='alert-box alert-success'>"
+						+ "  <span class='alert-icon'>&#9989;</span>"
+						+ "  <div><strong>Train Deleted:</strong> Train No. <strong>" + trainNo + "</strong> has been permanently removed from the schedule.</div>"
+						+ "</div>"
+						+ "</div>");
 			} else {
 				RequestDispatcher rd = req.getRequestDispatcher("CancleTrain.html");
 				rd.include(req, res);
-				pw.println("<div class='tab'><p1 class='menu'>Train No." + trainNo + " is Not Available !</p1></div>");
+				pw.println("<div style='max-width:900px; margin: 12px auto; width:100%;'>"
+						+ "<div class='alert-card-danger'>"
+						+ "  <div class='alert-card-icon'>&#9888;</div>"
+						+ "  <div style='flex:1;'>"
+						+ "    <div class='alert-card-title'>Train Not Found</div>"
+						+ "    <div class='alert-card-desc'>Train No. <strong>" + (trainNo != null ? trainNo : "") + "</strong> could not be found or has already been removed.</div>"
+						+ "  </div>"
+						+ "</div>"
+						+ "</div>");
 			}
 		} catch (Exception e) {
 			throw new TrainException(422, this.getClass().getName() + "_FAILED", e.getMessage());

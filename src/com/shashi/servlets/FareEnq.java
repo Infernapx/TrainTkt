@@ -33,31 +33,39 @@ public class FareEnq extends HttpServlet {
 			String fromStation = req.getParameter("fromstation");
 			String toStation = req.getParameter("tostation");
 			List<TrainBean> trains = trainService.getTrainsBetweenStations(fromStation, toStation);
+			RequestDispatcher rd = req.getRequestDispatcher("Fare.html");
+			rd.include(req, res);
 			if (trains != null && !trains.isEmpty()) {
-				RequestDispatcher rd = req.getRequestDispatcher("UserHome.html");
-				rd.include(req, res);
-				pw.println("<div class='main'><p1 class='menu'>Fare for Trains BetWeen Station " + fromStation + " and "
-						+ toStation + " is as below</p1></div>");
-				pw.println("<div class='tab'><table><tr><th>Train Name</th><th>Train No</th>"
-						+ "<th>From Stn</th><th>To Stn</th><th>Time</th><th>Seats</th><th>Fare (INR)</th><th>Action</th></tr>");
+				pw.println("<div class='tab'>"
+						+ "<h3 style='font-family:Outfit,sans-serif; font-size:19px; font-weight:700; color:#0f172a; margin-bottom:14px;'>"
+						+ "&#128176; Fares for Trains Between <strong>" + fromStation + "</strong> and <strong>" + toStation + "</strong></h3>");
+				pw.println("<table><tr><th>Train Name</th><th>Train No</th>"
+						+ "<th>From Station</th><th>To Station</th><th>Time</th><th>Available Seats</th><th>Fare (INR)</th><th>Action</th></tr>");
 				for (TrainBean train : trains) {
 					int hr = (int) (Math.random() * 24);
 					int min = (int) (Math.random() * 60);
 					String time = (hr < 10 ? ("0" + hr) : hr) + ":" + ((min < 10) ? "0" + min : min);
 
-					pw.println("" + "<tr><td>" + train.getTr_name() + "</td>" + "<td>" + train.getTr_no() + "</td>"
-							+ "<td>" + train.getFrom_stn() + "</td>" + "<td>" + train.getTo_stn() + "</td>" + "<td>"
-							+ time + "</td>" + "<td>" + train.getSeats() + "</td>" + "<td>" + train.getFare()
-							+ " RS</td><td><a href='booktrainbyref?trainNo=" + train.getTr_no() + "&fromStn="
+					pw.println("<tr><td>" + train.getTr_name() + "</td><td>" + train.getTr_no() + "</td>"
+							+ "<td>" + train.getFrom_stn() + "</td><td>" + train.getTo_stn() + "</td><td>"
+							+ time + "</td><td><span style='background:#ecfdf5; color:#065f46; font-weight:700; padding:3px 8px; border-radius:6px;'>"
+							+ train.getSeats() + "</span></td><td><strong>&#8377; " + train.getFare()
+							+ "</strong></td><td><a href='booktrainbyref?trainNo=" + train.getTr_no() + "&fromStn="
 							+ train.getFrom_stn() + "&toStn=" + train.getTo_stn()
-							+ "'><div class='red'>Book Now</div></a></td>" + "</tr>");
+							+ "' class='btn-book' style='padding:6px 14px; font-size:12.5px; text-decoration:none;'>Book Now</a></td></tr>");
 				}
 				pw.println("</table></div>");
 			} else {
-				RequestDispatcher rd = req.getRequestDispatcher("TrainBwStn.html");
-				rd.include(req, res);
-				pw.println("<div class='tab'><p1 class='menu'>There are no trains Between " + fromStation + " and "
-						+ toStation + "</p1></div>");
+				pw.println("<div style='max-width:900px; margin: 12px auto; width:100%;'>"
+						+ "<div class='alert-card-danger'>"
+						+ "  <div class='alert-card-icon'>&#9888;</div>"
+						+ "  <div style='flex:1;'>"
+						+ "    <div class='alert-card-title'>No Fare Details Found</div>"
+						+ "    <div class='alert-card-desc'>There are no scheduled trains found between <strong>"
+						+ fromStation + "</strong> and <strong>" + toStation + "</strong>.</div>"
+						+ "  </div>"
+						+ "</div>"
+						+ "</div>");
 			}
 		} catch (Exception e) {
 			throw new TrainException(422, this.getClass().getName() + "_FAILED", e.getMessage());

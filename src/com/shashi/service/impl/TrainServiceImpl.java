@@ -28,8 +28,8 @@ public class TrainServiceImpl implements TrainService {
 			ps.setString(4, train.getTo_stn());
 			ps.setLong(5, train.getSeats());
 			ps.setDouble(6, train.getFare());
-			ResultSet rs = ps.executeQuery();
-			if (rs.next()) {
+			int response = ps.executeUpdate();
+			if (response > 0) {
 				responseCode = ResponseCode.SUCCESS.toString();
 			}
 			ps.close();
@@ -70,9 +70,9 @@ public class TrainServiceImpl implements TrainService {
 			ps.setString(3, train.getTo_stn());
 			ps.setLong(4, train.getSeats());
 			ps.setDouble(5, train.getFare());
-			ps.setDouble(6, train.getTr_no());
-			ResultSet rs = ps.executeQuery();
-			if (rs.next()) {
+			ps.setLong(6, train.getTr_no());
+			int response = ps.executeUpdate();
+			if (response > 0) {
 				responseCode = ResponseCode.SUCCESS.toString();
 			}
 			ps.close();
@@ -84,12 +84,23 @@ public class TrainServiceImpl implements TrainService {
 
 	@Override
 	public TrainBean getTrainById(String trainNo) throws TrainException {
+		if (trainNo == null || trainNo.trim().isEmpty()) {
+			return null;
+		}
+		String cleanNo = trainNo.trim().replace("#", "").trim();
 		TrainBean train = null;
-		String query = "SELECT * FROM TRAIN WHERE TR_NO=?";
 		try {
 			Connection con = DBUtil.getConnection();
-			PreparedStatement ps = con.prepareStatement(query);
-			ps.setString(1, trainNo);
+			boolean isNumeric = cleanNo.matches("\\d+");
+			PreparedStatement ps;
+			if (isNumeric) {
+				ps = con.prepareStatement("SELECT * FROM TRAIN WHERE TR_NO=? OR UPPER(TR_NAME)=?");
+				ps.setLong(1, Long.parseLong(cleanNo));
+				ps.setString(2, cleanNo.toUpperCase());
+			} else {
+				ps = con.prepareStatement("SELECT * FROM TRAIN WHERE UPPER(TR_NAME) LIKE ?");
+				ps.setString(1, "%" + cleanNo.toUpperCase() + "%");
+			}
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
 				train = new TrainBean();

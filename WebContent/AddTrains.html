@@ -1,62 +1,65 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="ISO-8859-1">
-<title>E-Trains</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin - Add Train | National Ticket Booking Spot</title>
 <link rel="stylesheet" href="UserHome_Css.css">
 </head>
 <body>
 	<header>
-		<h1 class="hd">National Ticket Booking Spot</h1>
-		<div class="home">
-			<p class="menu">
-				<a href="AdminHome.html">Home</a>
-			</p>
-		</div>
-		<div class="home">
-			<p class="menu">
-				<a href="adminviewtrainfwd">View Trains</a>
-			</p>
-		</div>
-		<div class="home">
-			<p class="menu">
-				<a href="adminsearchtrainfwd">Search By TrainNo</a>
-			</p>
-		</div>
-
-		<div class="home">
-			<p class="menu">
-				<a href="addtrainfwd">Add Train</a>
-			</p>
-		</div>
-		<div class="home">
-			<p class="menu">
-				<a href="cancletrainfwd">Delete Train </a>
-			</p>
-		</div>
-		<div class="home">
-			<p class="menu">
-				<a href="updatetrain">Update Train Details</a>
-			</p>
-		</div>
-		<div class="home">
-			<p class="menu">
-				<a href="adminlogout">Logout</a>
-			</p>
+		<h1 class="hd">National Ticket Booking Spot &nbsp;<span style="font-size: 13px; font-weight: 700; color: #dc2626; background: #fee2e2; padding: 4px 10px; border-radius: 9999px;">Admin Portal</span></h1>
+		<div style="display: flex; flex-wrap: wrap; gap: 8px;">
+			<div class="home"><p class="menu"><a href="AdminHome.html">Home</a></p></div>
+			<div class="home"><p class="menu"><a href="adminviewtrainfwd">View Trains</a></p></div>
+			<div class="home"><p class="menu"><a href="adminsearchtrainfwd">Search by TrainNo</a></p></div>
+			<div class="home"><p class="menu"><a href="addtrainfwd">Add Train</a></p></div>
+			<div class="home"><p class="menu"><a href="cancletrainfwd">Delete Train</a></p></div>
+			<div class="home"><p class="menu"><a href="updatetrain">Update Train</a></p></div>
+			<div class="home"><p class="menu"><a href="adminlogout" style="color: #dc2626;">Logout</a></p></div>
 		</div>
 	</header>
-	<div class='main'>
-		<p class='menu'> Add Trains </p>
+
+	<div class="tab">
+		<h2 style="font-family: 'Outfit', sans-serif; font-size: 22px; font-weight: 700; color: #0f172a; margin-bottom: 8px;">Add New Train to Schedule</h2>
+		<p style="color: var(--text-muted); font-size: 14px; margin-bottom: 20px;">Provide train identifiers, origin, destination stations, seat inventory, and base fare.</p>
+
+		<form action="adminaddtrain" method="post">
+			<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+				<div class="form-group">
+					<label class="form-label">Train Number</label>
+					<input type="number" name="trainno" placeholder="e.g. 10009" required>
+				</div>
+				<div class="form-group">
+					<label class="form-label">Train Name</label>
+					<input type="text" name="trainname" placeholder="e.g. RAJDHANI EXPRESS" required>
+				</div>
+			</div>
+
+			<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+				<div class="form-group">
+					<label class="form-label">From Station</label>
+					<input type="text" name="fromstation" placeholder="e.g. HOWRAH" required>
+				</div>
+				<div class="form-group">
+					<label class="form-label">To Station</label>
+					<input type="text" name="tostation" placeholder="e.g. NEW DELHI" required>
+				</div>
+			</div>
+
+			<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+				<div class="form-group">
+					<label class="form-label">Total Seats Available</label>
+					<input type="number" name="available" placeholder="e.g. 150" required>
+				</div>
+				<div class="form-group">
+					<label class="form-label">Fare (INR)</label>
+					<input type="number" step="0.5" name="fare" placeholder="e.g. 1250.00" required>
+				</div>
+			</div>
+
+			<input type="submit" value="Register Train">
+		</form>
 	</div>
-	<form class="tab" action="adminaddtrain" method="post">
-		<br /> Train Number:<input type="text" name="trainno"><br />
-		<br /> Train Name: <input type="text" name="trainname"><br />
-		<br /> From Station: <input type="text" name="fromstation"><br />
-		<br /> To Station: <input type="text" name="tostation"><br />
-		<br /> Available: <input type="text" name="available"><br />
-		<br /> Fare (INR): <input type="text" name="fare"><br />
-		<br /> <input type="submit" value=" ADD TRAIN ">
-	</form>
-	<br />
 </body>
 </html>

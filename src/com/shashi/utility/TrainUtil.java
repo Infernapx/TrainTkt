@@ -32,8 +32,9 @@ public class TrainUtil {
 		try {
 			UserBean user = userService.loginUser(username, password);
 
-			// Add the user details to the ServletContext with key as role name
+			// Add the user details to the ServletContext and Session
 			request.getServletContext().setAttribute(userRole.toString(), user);
+			request.getSession().setAttribute(userRole.toString(), user);
 
 			// Store the user firstName and mailId in the http session
 			request.getSession().setAttribute("uName", user.getFName());
@@ -93,6 +94,10 @@ public class TrainUtil {
 	}
 
 	public static UserBean getCurrentCustomer(HttpServletRequest req) {
-		return (UserBean) req.getServletContext().getAttribute(UserRole.CUSTOMER.toString());
+		UserBean customer = (UserBean) req.getSession().getAttribute(UserRole.CUSTOMER.toString());
+		if (customer == null) {
+			customer = (UserBean) req.getServletContext().getAttribute(UserRole.CUSTOMER.toString());
+		}
+		return customer;
 	}
 }

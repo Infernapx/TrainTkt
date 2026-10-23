@@ -1,64 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="ISO-8859-1">
-<title>E-Trains</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin - Delete Train | National Ticket Booking Spot</title>
 <link rel="stylesheet" href="UserHome_Css.css">
 </head>
 <body>
 	<header>
-		<h1 class="hd">National Ticket Booking Spot</h1>
-		<div class="home">
-			<p class="menu">
-				<a href="AdminHome.html">Home</a>
-			</p>
-		</div>
-		<div class="home">
-			<p class="menu">
-				<a href="adminviewtrainfwd">View Trains</a>
-			</p>
-		</div>
-		<div class="home">
-			<p class="menu">
-				<a href="adminsearchtrainfwd">Search By TrainNo</a>
-			</p>
-		</div>
-
-		<div class="home">
-			<p class="menu">
-				<a href="addtrainfwd">Add Train</a>
-			</p>
-		</div>
-		<div class="home">
-			<p class="menu">
-				<a href="cancletrainfwd">Delete Train </a>
-			</p>
-		</div>
-		<div class="home">
-			<p class="menu">
-				<a href="updatetrain">Update Train Details</a>
-			</p>
-		</div>
-		<div class="home">
-			<p class="menu">
-				<a href="adminlogout">Logout</a>
-			</p>
+		<h1 class="hd">National Ticket Booking Spot &nbsp;<span style="font-size: 13px; font-weight: 700; color: #dc2626; background: #fee2e2; padding: 4px 10px; border-radius: 9999px;">Admin Portal</span></h1>
+		<div style="display: flex; flex-wrap: wrap; gap: 8px;">
+			<div class="home"><p class="menu"><a href="AdminHome.html">Home</a></p></div>
+			<div class="home"><p class="menu"><a href="adminviewtrainfwd">View Trains</a></p></div>
+			<div class="home"><p class="menu"><a href="adminsearchtrainfwd">Search by TrainNo</a></p></div>
+			<div class="home"><p class="menu"><a href="addtrainfwd">Add Train</a></p></div>
+			<div class="home"><p class="menu"><a href="cancletrainfwd">Delete Train</a></p></div>
+			<div class="home"><p class="menu"><a href="updatetrain">Update Train</a></p></div>
+			<div class="home"><p class="menu"><a href="adminlogout" style="color: #dc2626;">Logout</a></p></div>
 		</div>
 	</header>
-	
-	<div class='tab'>
-		<p class='menu'> Hey, Admin ! Welcome to our new NITRTC Website
-		</p>
-	</div>
-	
-	<div class='main'>
-		<p class='menu'>Train Cancellation</p>
-	</div>
-	<form class="tab" action="admincancletrain" method="post">
-		Train Number:<input type="text" name="trainno"><br />
-		<br /> <input type="submit" value=" CANCLE TRAIN ">
-	</form>
-	<br />
 
+	<div class="tab">
+		<h2 style="font-family: 'Outfit', sans-serif; font-size: 22px; font-weight: 700; color: #991b1b; margin-bottom: 8px;">Delete / Cancel Train Schedule</h2>
+		<p style="color: var(--text-muted); font-size: 14px; margin-bottom: 20px;">Careful: Cancelling a train removes it from active booking inventories.</p>
+
+		<form action="admincancletrain" method="post">
+			<div class="form-group">
+				<label class="form-label">Train Number to Cancel</label>
+				<input type="text" name="trainno" placeholder="Enter train number (e.g. 10008)" required>
+			</div>
+
+			<input type="submit" value="Confirm Train Cancellation" style="background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);">
+		</form>
+	</div>
 </body>
 </html>
