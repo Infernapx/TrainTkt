@@ -4,7 +4,7 @@
 [![Build Tool](https://img.shields.io/badge/Build-Maven%203.9-C71A36.svg?style=flat-square&logo=apachemaven)](https://maven.apache.org/)
 [![Server](https://img.shields.io/badge/Server-Embedded%20Tomcat%209-F8DC75.svg?style=flat-square&logo=apachetomcat)](https://tomcat.apache.org/)
 [![Database](https://img.shields.io/badge/Database-Embedded%20H2-blueviolet.svg?style=flat-square)](https://www.h2database.com/)
-[![UI Style](https://img.shields.io/badge/Design-Cyber--Transit%20Dark%20HUD-00f0ff.svg?style=flat-square)](https://github.com/Infernapx/Train-Ticket-Reservation-System)
+[![UI Style](https://img.shields.io/badge/Design-Cyber--Transit%20Dark%20HUD-00f0ff.svg?style=flat-square)](https://github.com/Infernapx/TrainTkt)
 [![License](https://img.shields.io/badge/License-MIT-green.svg?style=flat-square)](LICENSE)
 
 An enterprise-grade, high-performance Railway Reservation System built with **Java Servlets & J2EE**, featuring an embedded zero-configuration **H2 Database** and an extraordinary **Futuristic Cyber-Transit HUD** interface.
@@ -192,8 +192,8 @@ The script automatically:
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/Infernapx/Train-Ticket-Reservation-System.git
-cd Train-Ticket-Reservation-System
+git clone https://github.com/Infernapx/TrainTkt.git
+cd TrainTkt
 
 # 2. Compile and package the WAR
 mvn clean package -DskipTests
